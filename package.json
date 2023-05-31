@@ -1,9 +1,9 @@
 {
   "name": "gatsby-starter-blog",
   "private": true,
-  "description": "A starter for a blog powered by Gatsby and Markdown",
+  "description": "Mario Lopez, the software engineer crafting responsive sites and web-apps. Stay on the cutting edge of innovation and join Mario on his journey through the ever-evolving world of technology.",
   "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Mario Lopez <m9lopeztri@gmail.com>",
   "bugs": {
     "url": "https://github.com/gatsbyjs/gatsby/issues"
   },
@@ -16,11 +16,14 @@
     "gatsby-plugin-manifest": "^5.10.0",
     "gatsby-plugin-sharp": "^5.10.0",
     "gatsby-remark-images": "^7.10.0",
+    "gatsby-remark-mermaid": "^4.0.0",
     "gatsby-remark-prismjs": "^7.10.0",
     "gatsby-remark-responsive-iframe": "^6.10.0",
     "gatsby-source-filesystem": "^5.10.0",
     "gatsby-transformer-remark": "^6.10.0",
     "gatsby-transformer-sharp": "^5.10.0",
+    "mermaid": "^10.2.0",
+    "playwright": "^1.34.3",
     "prismjs": "^1.29.0",
     "react": "^18.1.0",
     "react-dom": "^18.1.0"

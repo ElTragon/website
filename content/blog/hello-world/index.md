@@ -1,39 +1,90 @@
 ---
-title: Hello World
-date: "2015-05-01T22:12:03.284Z"
+title: "Why and How: Markdowns"
+date: "2023-05-31T22:12:03.284Z"
 description: "Hello World"
 ---
 
-This is my first post on my new fake blog! How exciting!
+This is my first post on my new blog!
 
-I'm sure I'll write a lot more interesting things in the future.
+![Noice](./noice.png)
 
-Oh, and here's a great quote from this Wikipedia on
-[salted duck eggs](https://en.wikipedia.org/wiki/Salted_duck_egg).
+I'm sure I'll write a lot more interesting things in the future, but for now I'll explain markdown files(.md).
 
-> A salted duck egg is a Chinese preserved food product made by soaking duck
-> eggs in brine, or packing each egg in damp, salted charcoal. In Asian
-> supermarkets, these eggs are sometimes sold covered in a thick layer of salted
-> charcoal paste. The eggs may also be sold with the salted paste removed,
-> wrapped in plastic, and vacuum packed. From the salt curing process, the
-> salted duck eggs have a briny aroma, a gelatin-like egg white and a
-> firm-textured, round yolk that is bright orange-red in color.
+# Why use Markdown files
 
-![Chinese Salty Egg](./salty_egg.jpg)
+Markdown is a markup language for creating simple formatted documents without the need for a GUI to make bullets, bold. It's meant to help you keep your hands on the keyboard and not on the mouse. Markdown files are often used on github for making docs. So it's good to know the basics for making READMEs and blogs if you are like me.
 
-You can also write code blocks here!
+# When should you avoid Markdown files
 
-```js
-const saltyDuckEgg = "chinese preserved food product"
+First of all Markdown is a super set of HTML. It's susceptible to Cross-Site Scripting attacks(XSS) because its unescaped. For more information why [click here to learn more](<https://github.com/showdownjs/showdown/wiki/Markdown's-XSS-Vulnerability-(and-how-to-mitigate-it)>).
+
+TLDR Avoid talking user information all together if you are using Markdown files. If you are do need to, then handle user info by using of HTML XSS filtering libraries, handle this on the server side not the client side, lastly you need to filter the output not the input.
+
+But if you are using it for Docs or Blogs only, then you don't need to worry.
+
+# Cool things you can do
+
+You can make some diagrams with markdown thanks to [Mermaid.JS](https://mermaid.js.org/intro/)
+
+```
+graph TD;
+      Socks-->???;
+      Luck-->???
+      ???-->Profit;
 ```
 
-| Number | Title                                    | Year |
-| :----- | :--------------------------------------- | ---: |
-| 1      | Harry Potter and the Philosopher’s Stone | 2001 |
-| 2      | Harry Potter and the Chamber of Secrets  | 2002 |
-| 3      | Harry Potter and the Prisoner of Azkaban | 2004 |
+```mermaid
+graph TD;
+      Socks-->???;
+      Luck-->???
+      ???-->Profit;
+```
 
-[View raw (TEST.md)](https://raw.github.com/adamschwartz/github-markdown-kitchen-sink/master/README.md)
+You can be as complex as you want
+
+```
+quadrantChart
+    title Reach and engagement of campaigns
+    x-axis Low Reach --> High Reach
+    y-axis Low Engagement --> High Engagement
+    quadrant-1 We should expand
+    quadrant-2 Need to promote
+    quadrant-3 Re-evaluate
+    quadrant-4 May be improved
+    Campaign A: [0.3, 0.6]
+    Campaign B: [0.45, 0.23]
+    Campaign C: [0.57, 0.69]
+    Campaign D: [0.78, 0.34]
+    Campaign E: [0.40, 0.34]
+    Campaign F: [0.35, 0.78]
+```
+
+```mermaid
+quadrantChart
+    title Reach and engagement of campaigns
+    x-axis Low Reach --> High Reach
+    y-axis Low Engagement --> High Engagement
+    quadrant-1 We should expand
+    quadrant-2 Need to promote
+    quadrant-3 Re-evaluate
+    quadrant-4 May be improved
+    Campaign A: [0.3, 0.6]
+    Campaign B: [0.45, 0.23]
+    Campaign C: [0.57, 0.69]
+    Campaign D: [0.78, 0.34]
+    Campaign E: [0.40, 0.34]
+    Campaign F: [0.35, 0.78]
+```
+
+But this these case I would just import some image, save time where you can
+
+![Time is Money](./timeIsMoney.png)
+
+# Cheat Sheet
+
+```
+![Time is Money](./timeIsMoney.png)
+```
 
 This is a paragraph.
 
@@ -188,7 +239,37 @@ Paragraph:
 
     - - -
 
-    ---------------------------------------
+```bash
+yarn install
+```
+
+````markdown
+    ```bash
+    yarn install
+    ```
+````
+
+```js
+var http = require("http")
+
+http
+  .createServer(function (req, res) {
+    res.writeHead(200, { "Content-Type": "text/plain" })
+    res.end("Hello World!")
+  })
+  .listen(8080)
+```
+
+````markdown
+    ```js
+        var http = require('http');
+
+        http.createServer(function (req, res) {
+            res.writeHead(200, {'Content-Type': 'text/plain'});
+            res.end('Hello World!');
+        }).listen(8080);
+    ```
+````
 
 This is [an example](http://example.com "Example") link.
 
