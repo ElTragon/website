@@ -17,7 +17,7 @@ module.exports = {
     description: `Follow this blog to stay up to date on programming news and learn new stuff.`,
     siteUrl: `https://example.vom`,
     social: {
-      twitter: `kylemathews`,
+      twitter: `m9lopeztri`,
     },
   },
   plugins: [

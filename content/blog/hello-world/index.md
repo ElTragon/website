@@ -9,6 +9,7 @@ This is my first post on my new blog!
 ![Noice](./noice.png)
 
 I'm sure I'll write a lot more interesting things in the future, but for now I'll explain markdown files(.md).
+z
 
 # Why use Markdown files
 
@@ -81,6 +82,8 @@ But this these case I would just import some image, save time where you can
 ![Time is Money](./timeIsMoney.png)
 
 # Cheat Sheet
+
+Add a image to gif like this
 
 ```
 ![Time is Money](./timeIsMoney.png)
