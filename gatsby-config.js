@@ -9,15 +9,15 @@
  */
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Starter Blog`,
+    title: `Mario's blog`,
     author: {
-      name: `Kyle Mathews`,
-      summary: `who lives and works in San Francisco building useful things.`,
+      name: `Mario Lopez`,
+      summary: `a full stack engineer building cool stuff.`,
     },
-    description: `A starter blog demonstrating what Gatsby can do.`,
-    siteUrl: `https://gatsbystarterblogsource.gatsbyjs.io/`,
+    description: `Follow this blog to stay up to date on programming news and learn new stuff.`,
+    siteUrl: `https://example.vom`,
     social: {
-      twitter: `kylemathews`,
+      twitter: `m9lopeztri`,
     },
   },
   plugins: [
@@ -40,6 +40,7 @@ module.exports = {
       resolve: `gatsby-transformer-remark`,
       options: {
         plugins: [
+          `gatsby-remark-mermaid`,
           {
             resolve: `gatsby-remark-images`,
             options: {
