@@ -19,7 +19,7 @@ Markdown is a markup language for creating simple formatted documents without th
 
 First of all Markdown is a super set of HTML. It's susceptible to Cross-Site Scripting attacks(XSS) because its unescaped. For more information why [click here to learn more](<https://github.com/showdownjs/showdown/wiki/Markdown's-XSS-Vulnerability-(and-how-to-mitigate-it)>).
 
-TLDR Avoid talking user information all together if you are using Markdown files. If you are do need to, then handle user info by using of HTML XSS filtering libraries, handle this on the server side not the client side, lastly you need to filter the output not the input.
+TLDR Avoid taking user information all together if you are using Markdown files. If you are do need to, then handle user info by using of HTML XSS filtering libraries, handle this on the server side not the client side, lastly you need to filter the output not the input.
 
 But if you are using it for Docs or Blogs only, then you don't need to worry.
 
@@ -77,13 +77,13 @@ quadrantChart
     Campaign F: [0.35, 0.78]
 ```
 
-But this these case I would just import some image, save time where you can
+But this these case I would just import some image, save time where you can.
 
 ![Time is Money](./timeIsMoney.png)
 
 # Cheat Sheet
 
-Add a image to gif like this
+Add a image or gif like this
 
 ```
 ![Time is Money](./timeIsMoney.png)
