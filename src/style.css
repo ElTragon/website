@@ -1,4 +1,6 @@
-/* CSS Custom Properties Definitions */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
   --maxWidth-none: "none";
@@ -52,13 +54,21 @@
   --fontSize-5: 2.074rem;
   --fontSize-6: 2.488rem;
   --fontSize-7: 2.986rem;
-  --color-primary: #005b99;
-  --color-text: #2e353f;
+  --color-primary: #65c87c;
+  --color-text: #040703;
   --color-text-light: #4f5969;
-  --color-heading: #1a202c;
+  --color-heading: #65c87c;
   --color-heading-black: black;
-  --color-accent: #d1dce5;
+  --color-accent: #359279;
+  --bg-color: #e3f3dd;
 }
+
+/* Primary: #040703 (RGB: 4, 7, 3)
+Secondary: #e3f3dd (RGB: 227, 243, 221)
+Primary Button: #65c87c (RGB: 101, 200, 124)
+Secondary Button: #c7ebe1 (RGB: 199, 235, 225)
+Accent: #359279 (RGB: 53, 146, 121) */
+
 
 /* HTML elements */
 
@@ -112,13 +122,13 @@ h4,
 h5,
 h6 {
   font-weight: var(--fontWeight-bold);
-  color: var(--color-heading);
+  color: var(color-accent);
 }
 
 h1 {
   font-weight: var(--fontWeight-black);
   font-size: var(--fontSize-6);
-  color: var(--color-heading-black);
+  color: var(color-primary);
 }
 
 h2 {
