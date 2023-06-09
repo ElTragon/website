@@ -4,7 +4,6 @@ import { Link, graphql } from "gatsby"
 import Bio from "../components/Bio"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
-import { getSrc } from "gatsby-plugin-image"
 
 const BlogIndex = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata?.title || `Title`
@@ -23,11 +22,9 @@ const BlogIndex = ({ data, location }) => {
     )
   }
 
-  console.log(getSrc(posts[0].frontmatter.featuredImage))
-
   return (
     <Layout location={location} title={siteTitle}>
-      <Bio />
+      <h2>Blogs</h2>
       <ol style={{ listStyle: `none` }}>
         {posts.map(post => {
           const title = post.frontmatter.title || post.fields.slug
@@ -90,17 +87,6 @@ export const pageQuery = graphql`
           date(formatString: "MMMM DD, YYYY")
           title
           description
-          featuredImage {
-            childImageSharp {
-              gatsbyImageData(
-                height: 627
-                width: 1200
-                placeholder: BLURRED
-                transformOptions: { fit: CONTAIN }
-                layout: FIXED
-              )
-            }
-          }
         }
       }
     }

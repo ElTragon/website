@@ -1,0 +1,11 @@
+.container {
+    @apply min-w-[10rem] max-w-[50rem] flex flex-col flex-nowrap gap-0;
+}
+
+.pretext {
+    @apply text-sm mb-0;
+}
+
+.header {
+    @apply m-0 mt-2;
+}
