@@ -2,6 +2,7 @@
 title: "Why and How: Markdowns"
 date: "2023-05-31T22:12:03.284Z"
 description: "Need a quick TLDR about Markdown files, in this blog I go over the use-cases of Markdown files, why they can be funky sometimes and provide a nice cheat sheet for Markdown files."
+featuredImage: "whatsTheDeal.png"
 ---
 
 This is my first post on my new blog!

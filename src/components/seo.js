@@ -7,9 +7,12 @@
 
 import * as React from "react"
 import { useStaticQuery, graphql } from "gatsby"
+import { getSrc } from "gatsby-plugin-image"
 
-const Seo = ({ description, title, children }) => {
-  const { site } = useStaticQuery(
+const baseURL = "http://localhost:8000/"
+
+const Seo = ({ description, title, children, imagePath }) => {
+  const { site, logo } = useStaticQuery(
     graphql`
       query {
         site {
@@ -21,10 +24,20 @@ const Seo = ({ description, title, children }) => {
             }
           }
         }
+        logo: file(relativePath: { eq: "logo.png" }) {
+          childImageSharp {
+            fixed(height: 800, width: 800) {
+              src
+            }
+          }
+        }
       }
     `
   )
 
+  console.log(logo)
+  console.log("hello", logo.childImageSharp.fixed.src)
+  const defaultImage = logo.childImageSharp.fixed.src
   const metaDescription = description || site.siteMetadata.description
   const defaultTitle = site.siteMetadata?.title
 
@@ -35,6 +48,9 @@ const Seo = ({ description, title, children }) => {
       <meta property="og:title" content={title} />
       <meta property="og:description" content={metaDescription} />
       <meta property="og:type" content="website" />
+      <meta property="og:image" content={baseURL + defaultImage} />
+      <meta name="twitter:image" content={baseURL + defaultImage} />
+
       <meta name="twitter:card" content="summary" />
       <meta
         name="twitter:creator"
@@ -42,6 +58,25 @@ const Seo = ({ description, title, children }) => {
       />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={metaDescription} />
+
+      <link
+        rel="apple-touch-icon"
+        sizes="180x180"
+        href="../images/favicon_io/apple-touch-icon.png"
+      />
+      <link
+        rel="icon"
+        type="image/png"
+        sizes="32x32"
+        href="../images/favicon_io/favicon-32x32.png"
+      />
+      <link
+        rel="icon"
+        type="image/png"
+        sizes="16x16"
+        href="../images/favicon_io/favicon-16x16.png"
+      />
+      <link rel="manifest" href="../images/favicon_io/site.webmanifest"></link>
       {children}
     </>
   )

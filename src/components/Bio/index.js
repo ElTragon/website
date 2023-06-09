@@ -7,7 +7,9 @@
 
 import * as React from "react"
 import { useStaticQuery, graphql } from "gatsby"
-import { StaticImage } from "gatsby-plugin-image"
+// import "../../global.css"
+import * as css from "./index.module.css"
+// import { StaticImage } from "gatsby-plugin-image"
 
 const Bio = () => {
   const data = useStaticQuery(graphql`
@@ -31,25 +33,24 @@ const Bio = () => {
   const social = data.site.siteMetadata?.social
 
   return (
-    <div className="bio">
-      <StaticImage
+    <div className={css.container}>
+      <p className={css.pretext}>It's a me</p>
+      <h1 className={css.header}>Mario Lopez</h1>
+      {/* <StaticImage
         className="bio-avatar"
         layout="fixed"
         formats={["auto", "webp", "avif", "png"]}
-        src="../images/profile.png"
+        src="../../images/profile.png"
         width={50}
         height={50}
         quality={95}
         alt="Profile picture"
-      />
+      /> */}
       {author?.name && (
-        <p>
-          Written by <strong>{author.name}</strong> {author?.summary || null}
-          {` `}
-          <a href={`https://twitter.com/${social?.twitter || ``}`}>
-            You should follow them on Twitter
-          </a>
-        </p>
+        <h2>
+          Freelancing full stack engineer. Building pixel perfect web-apps.
+          Passionate about programming, running a blog too.
+        </h2>
       )}
     </div>
   )
