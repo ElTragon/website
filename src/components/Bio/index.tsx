@@ -8,7 +8,7 @@
 import * as React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 // import "../../global.css"
-import * as css from "./index.module.css"
+const css = require("./index.module.css")
 // import { StaticImage } from "gatsby-plugin-image"
 
 const Bio = () => {

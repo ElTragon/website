@@ -2,7 +2,6 @@ import * as React from "react"
 import DeskTopNav from "./DeskTopNav"
 import MobileNav from "./MobileNav"
 import { graphql, useStaticQuery } from "gatsby"
-import { getSrc } from "gatsby-plugin-image"
 const css = require("./index.module.css")
 
 const NavBar = () => {

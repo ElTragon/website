@@ -1,23 +1,20 @@
 .container{
-    @apply pl-6 pt-3;
+    @apply px-6 z-10 w-full bg-background flex flex-row justify-between items-center;
 }
 
 .links{
-    @apply flex flex-row;
+    @apply flex flex-col gap-6 items-center pt-8;
 }
 
 .link{
-    @apply pl-6 text-lg text-text;
+    @apply text-lg text-accent;
 }
 
-.link:first-child{
-    @apply pl-0;
-}
 
 .menuContainer{
-    @apply z-10 h-full w-full bg-background;
+    @apply fixed z-10 h-screen w-screen bg-background;
 }
 
 .menuButton {
-    @apply p-3 rounded-full fill-accent bg-background text-accent hover:text-primary-button;
+    @apply p-0 fill-accent text-accent hover:text-primary-button;
 }
