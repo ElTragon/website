@@ -8,7 +8,6 @@ type Props = {
 }
 
 const DeskTopNav = ({ logoSrc }: Props) => {
-  console.log(logoSrc)
   return (
     <div className={css.container}>
       <img src={logoSrc} alt="logo" style={{ width: "30px", height: "30px" }} />

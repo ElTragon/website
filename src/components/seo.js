@@ -35,8 +35,6 @@ const Seo = ({ description, title, children, imagePath }) => {
     `
   )
 
-  console.log(logo)
-  console.log("hello", logo.childImageSharp.fixed.src)
   const defaultImage = logo.childImageSharp.fixed.src
   const metaDescription = description || site.siteMetadata.description
   const defaultTitle = site.siteMetadata?.title
