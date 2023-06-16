@@ -1,0 +1,23 @@
+.container{
+    @apply pl-6 pt-3;
+}
+
+.links{
+    @apply flex flex-row;
+}
+
+.link{
+    @apply pl-6 text-lg text-text;
+}
+
+.link:first-child{
+    @apply pl-0;
+}
+
+.menuContainer{
+    @apply z-10 h-full w-full bg-background;
+}
+
+.menuButton {
+    @apply p-3 rounded-full fill-accent bg-background text-accent hover:text-primary-button;
+}

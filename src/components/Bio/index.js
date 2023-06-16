@@ -34,7 +34,7 @@ const Bio = () => {
 
   return (
     <div className={css.container}>
-      <p className={css.pretext}>It's a me</p>
+      <p className={css.pretext}>It's-a me</p>
       <h1 className={css.header}>Mario Lopez</h1>
       {/* <StaticImage
         className="bio-avatar"

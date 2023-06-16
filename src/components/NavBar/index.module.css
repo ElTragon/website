@@ -1,0 +1,8 @@
+.desktopNav{
+    @apply hidden md:block;
+}
+
+.mobileNav{
+    @apply md:hidden;
+  
+}
