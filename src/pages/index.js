@@ -23,8 +23,6 @@ const BlogIndex = ({ data, location }) => {
     )
   }
 
-  console.log(getSrc(posts[0].frontmatter.featuredImage))
-
   return (
     <Layout location={location} title={siteTitle}>
       <Bio />

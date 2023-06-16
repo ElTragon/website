@@ -1,0 +1,15 @@
+.container{
+    @apply w-screen flex flex-row px-12 py-3 justify-between bg-background;
+}
+
+.links{
+    @apply flex flex-row;
+}
+
+.link{
+    @apply pl-6 text-lg font-semibold text-primary-button hover:underline;
+}
+
+.link:first-child{
+    @apply pl-0;
+}

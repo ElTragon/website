@@ -6,11 +6,11 @@ module.exports = {
   ],
   theme: {
     colors: {
-      text: "#020d03",
-      background: "#ffffff",
-      "primary-button": "#6258e4",
-      "secondary-button": "#edfcee",
-      accent: "#b8281e",
+      text: "#040703",
+      background: "#e3f3dd",
+      "primary-button": "#65c87c",
+      "secondary-button": "#c7ebe1",
+      accent: "#359279",
     },
     extend: {},
   },
