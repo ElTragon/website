@@ -11,7 +11,14 @@ import { getSrc } from "gatsby-plugin-image"
 
 const baseURL = "http://localhost:8000/"
 
-const Seo = ({ description, title, children, imagePath }) => {
+type Props = {
+  title: string
+  description: string
+  imagePath?: string
+  children?: JSX.Element
+}
+
+const Seo = ({ description, title, children, imagePath }: Props) => {
   const { site, logo } = useStaticQuery(
     graphql`
       query {
