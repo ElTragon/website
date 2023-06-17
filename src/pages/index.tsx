@@ -5,6 +5,8 @@ import Bio from "../components/Bio"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 import { getSrc } from "gatsby-plugin-image"
+import { directiveSanitizer } from "mermaid/dist/utils"
+import BlogPreview from "../components/BlogPreview"
 
 const BlogIndex = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata?.title || `Title`
@@ -22,12 +24,28 @@ const BlogIndex = ({ data, location }) => {
       </Layout>
     )
   }
+  console.log(getSrc(posts[0].frontmatter))
+  console.log(getSrc(posts[0].frontmatter.featuredImage))
 
   return (
     <Layout location={location} title={siteTitle}>
       <Bio />
-      <ol style={{ listStyle: `none` }}>
+
+      {posts && posts[0] && (
+        <div className="newestBlog">
+          <h3>Newest Blog</h3>
+          <BlogPreview
+            title={posts[0].frontmatter.title}
+            imagePath={getSrc(posts[0].frontmatter.featuredImage) || ""}
+            linkTo={posts[0].fields.slug}
+            description={posts[0].frontmatter.description || posts[0].excerpt}
+          />
+        </div>
+      )}
+
+      {/* <ol style={{ listStyle: `none` }}>
         {posts.map(post => {
+          console.log(post)
           const title = post.frontmatter.title || post.fields.slug
 
           return (
@@ -57,7 +75,7 @@ const BlogIndex = ({ data, location }) => {
             </li>
           )
         })}
-      </ol>
+      </ol> */}
     </Layout>
   )
 }
@@ -69,7 +87,9 @@ export default BlogIndex
  *
  * See: https://www.gatsbyjs.com/docs/reference/built-in-components/gatsby-head/
  */
-export const Head = () => <Seo title="All posts" />
+export const Head = () => (
+  <Seo title="Mario's blog" description="Stay up with Dev news with Mario" />
+)
 
 export const pageQuery = graphql`
   {
