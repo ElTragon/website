@@ -17,3 +17,7 @@
 .description {
     @apply  font-thin text-base m-0;
 }
+
+.image {
+    @apply hidden md:block  md:w-[300px] md:h-56
+}

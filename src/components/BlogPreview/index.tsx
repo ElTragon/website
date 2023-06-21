@@ -20,11 +20,7 @@ export default function BlogPreview({
     <div className={css.container}>
       {/* {imagePath} */}
 
-      <img
-        src={imagePath}
-        alt="coolMeme"
-        style={{ width: "300px", height: "225px" }}
-      />
+      <img className={css.image} src={imagePath} alt="coolMeme" />
       <div className={css.flexContainer}>
         <div className={css.header}>{title}</div>
 
