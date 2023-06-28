@@ -1,5 +1,5 @@
 .container{
-    @apply  h-[30rem] md:h-[15rem] flex flex-col md:flex-row gap-8;
+    @apply  h-[30rem] md:h-[15rem] flex flex-col gap-2;
 }
 
 .link{
@@ -11,7 +11,7 @@
 }
 
 .header {
-    @apply text-accent font-semibold text-lg;
+    @apply text-accent hover:underline font-semibold text-lg;
 }
 
 .description {
