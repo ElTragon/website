@@ -29,14 +29,13 @@ const BlogIndex = ({ data, location }) => {
 
   return (
     <Layout location={location} title={siteTitle}>
-      <Bio />
+      <Bio header />
 
       {posts && posts[0] && (
         <div className="newestBlog">
           <h3>Newest Blog</h3>
           <BlogPreview
             title={posts[0].frontmatter.title}
-            imagePath={getSrc(posts[0].frontmatter.featuredImage) || ""}
             linkTo={posts[0].fields.slug}
             description={posts[0].frontmatter.description || posts[0].excerpt}
           />
