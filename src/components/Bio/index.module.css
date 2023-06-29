@@ -9,3 +9,11 @@
 .header {
     @apply m-0 mt-2;
 }
+
+.contactContainer {
+    @apply font-thin text-base text-left;
+}
+
+.contactLink {
+    @apply block text-base text-primary-button hover:underline
+}
