@@ -6,4 +6,5 @@ type LinkType = {
 export const NavLinks = [
   { routeTo: "/", name: "Home" },
   { routeTo: "/blogs", name: "Blogs" },
+  { routeTo: "/resume", name: "Resume" },
 ]
