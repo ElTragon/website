@@ -7,6 +7,7 @@ import Seo from "../components/seo"
 import { getSrc } from "gatsby-plugin-image"
 import { directiveSanitizer } from "mermaid/dist/utils"
 import BlogPreview from "../components/BlogPreview"
+import AboutMe from "../components/AboutMe"
 
 const BlogIndex = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata?.title || `Title`
@@ -39,6 +40,8 @@ const BlogIndex = ({ data, location }) => {
           />
         </div>
       )}
+
+      <AboutMe />
 
       {/* <ol style={{ listStyle: `none` }}>
         {posts.map(post => {

@@ -51,12 +51,12 @@
   --fontSize-6: 2.488rem;
   --fontSize-7: 2.986rem;
   --color-primary: #65c87c;
-  --color-text: #040703;
+  --color-text: #e6f1ff;
   --color-text-light: #4f5969;
   --color-heading: #65c87c;
   --color-heading-black: black;
   --color-accent: #359279;
-  --bg-color: #e3f3dd;
+  --bg-color: #112240;
 }
 
 /* Primary: #040703 (RGB: 4, 7, 3)
@@ -243,6 +243,13 @@ a:focus {
 }
 
 /* Custom classes */
+
+.layout-wrapper {
+  background-color: var(--bg-color);
+  min-height: 100vh;
+
+
+}
 
 .global-wrapper {
   margin: var(--spacing-0) auto;

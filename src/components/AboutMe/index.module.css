@@ -2,16 +2,12 @@
     @apply min-w-[10rem] max-w-[50rem] flex flex-col flex-nowrap gap-0;
 }
 
-.tagLine{
-    @apply font-medium my-0;
-}
-
 .pretext {
     @apply text-sm mb-0;
 }
 
 .header {
-    @apply m-0 my-0;
+    @apply m-0 mt-2;
 }
 
 .contactContainer {
@@ -21,4 +17,3 @@
 .contactLink {
     @apply block text-base text-primary-button hover:underline
 }
-
