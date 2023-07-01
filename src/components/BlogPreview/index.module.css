@@ -1,9 +1,9 @@
 .container{
-    @apply  h-[30rem] md:h-[15rem] flex flex-col gap-2;
+    @apply  h-[15rem] md:h-[10rem] flex flex-col gap-2 border-2 p-2 rounded-lg shadow-lg border-slate outline-none hover:outline outline hover:outline-offset-2 hover:outline-slate hover:outline-1;
 }
 
 .link{
-    @apply text-primary-button hover:underline;
+    @apply text-green hover:underline;
 }
 
 .flexContainer {

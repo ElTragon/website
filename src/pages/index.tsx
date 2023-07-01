@@ -8,6 +8,7 @@ import { getSrc } from "gatsby-plugin-image"
 import { directiveSanitizer } from "mermaid/dist/utils"
 import BlogPreview from "../components/BlogPreview"
 import AboutMe from "../components/AboutMe"
+import NewestBlog from "../components/NewestBlog"
 
 const BlogIndex = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata?.title || `Title`
@@ -31,14 +32,11 @@ const BlogIndex = ({ data, location }) => {
       <Bio header />
 
       {posts && posts[0] && (
-        <div className="newestBlog">
-          <h3>Newest Blog</h3>
-          <BlogPreview
-            title={posts[0].frontmatter.title}
-            linkTo={posts[0].fields.slug}
-            description={posts[0].frontmatter.description || posts[0].excerpt}
-          />
-        </div>
+        <NewestBlog
+          title={posts[0].frontmatter.title}
+          linkTo={posts[0].fields.slug}
+          description={posts[0].frontmatter.description || posts[0].excerpt}
+        />
       )}
 
       <AboutMe />

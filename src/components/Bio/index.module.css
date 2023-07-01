@@ -3,15 +3,15 @@
 }
 
 .tagLine{
-    @apply font-medium my-0;
+    @apply font-medium my-0 text-lightSlate;
 }
 
 .pretext {
-    @apply text-sm mb-0;
+    @apply text-sm mb-0 text-lightSlate;
 }
 
 .header {
-    @apply m-0 my-0;
+    @apply m-0 my-0 text-lightestSlate;
 }
 
 .contactContainer {
