@@ -2,12 +2,24 @@
     @apply min-w-[10rem] max-w-[50rem] flex flex-col flex-nowrap gap-0;
 }
 
-.pretext {
-    @apply text-sm mb-0;
+.text {
+    @apply mb-0 text-base font-thin text-lightSlate;
 }
 
 .header {
-    @apply m-0 mt-2;
+    @apply mt-6 mb-4 text-green;
+}
+
+.listContainer{
+    @apply flex flex-row gap-12;
+}
+
+.techContainer{
+    @apply m-4 list-disc list-outside text-green;
+}
+
+.tech{
+    @apply text-lightestSlate text-base;
 }
 
 .contactContainer {

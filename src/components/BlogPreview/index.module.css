@@ -11,7 +11,7 @@
 }
 
 .header {
-    @apply text-accent hover:underline font-semibold text-lg;
+    @apply text-green hover:underline font-semibold text-lg;
 }
 
 .description {
