@@ -14,9 +14,11 @@ const DeskTopNav = ({ logoSrc }: Props) => {
 
       <div className={css.links}>
         {NavLinks.map((link, i) => (
-          <Link key={i} className={css.link} to={link.routeTo}>
+          <a key={i} className={css.link} href={link.routeTo}>
+            <span className={css.number}>0{i}. </span>
+
             {link.name}
-          </Link>
+          </a>
         ))}
       </div>
     </div>

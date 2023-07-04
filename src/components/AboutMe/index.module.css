@@ -1,0 +1,31 @@
+.container {
+    @apply min-w-[10rem] max-w-[50rem] flex flex-col flex-nowrap gap-0;
+}
+
+.text {
+    @apply mb-0 text-base font-thin text-lightSlate;
+}
+
+.header {
+    @apply mt-6 mb-4 text-green;
+}
+
+.listContainer{
+    @apply flex flex-row gap-12;
+}
+
+.techContainer{
+    @apply m-4 list-disc list-outside text-green;
+}
+
+.tech{
+    @apply text-lightestSlate text-base;
+}
+
+.contactContainer {
+    @apply font-thin text-base text-left;
+}
+
+.contactLink {
+    @apply block text-base text-primary-button hover:underline
+}

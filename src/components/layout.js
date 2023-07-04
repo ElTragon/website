@@ -23,7 +23,7 @@ const Layout = ({ location, title, children }) => {
   }
 
   return (
-    <>
+    <div className="layout-wrapper">
       <NavBar />
 
       <div className="global-wrapper" data-is-root-path={isRootPath}>
@@ -34,7 +34,7 @@ const Layout = ({ location, title, children }) => {
           <a href="https://github.com/ElTragon">Mario Lopez</a>
         </footer>
       </div>
-    </>
+    </div>
   )
 }
 

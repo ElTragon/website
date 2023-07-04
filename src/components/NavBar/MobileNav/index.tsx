@@ -45,9 +45,9 @@ const Menu = ({ onClick, logoSrc }: MenuProps & Props) => {
 
       <div className={css.links}>
         {NavLinks.map((link, i) => (
-          <Link key={i} className={css.link} to={link.routeTo}>
+          <a key={i} className={css.link} href={link.routeTo}>
             {link.name}
-          </Link>
+          </a>
         ))}
       </div>
     </div>
@@ -66,7 +66,6 @@ const MobileNav = ({ logoSrc }: Props) => {
   return (
     <div className={css.container}>
       <img src={logoSrc} alt="logo" style={{ width: "30px", height: "30px" }} />
-
       <MenuButton onClick={onClick} />
     </div>
   )

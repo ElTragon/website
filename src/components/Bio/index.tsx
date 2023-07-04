@@ -31,16 +31,11 @@ const Bio = ({ header }: Props) => {
       <p className={css.pretext}>{header ? "It's-a me" : "Made by"}</p>
       <h1 className={css.header}>Mario Lopez</h1>
 
-      {header && (
-        <h2>
-          Freelancing full stack engineer. Building pixel perfect web-apps.
-          Passionate about programming, running a blog too.
-        </h2>
-      )}
+      {header && <h2 className={css.tagLine}>Handyman for the web</h2>}
 
       {!header && (
         <div className={css.contactContainer}>
-          Freelancing full stack engineer
+          Handyman for the web{" "}
           <a href="/#contact" className={css.contactLink}>
             Let's get in touch
           </a>

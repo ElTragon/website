@@ -1,13 +1,17 @@
 .container{
-    @apply w-screen flex flex-row px-12 py-3 justify-between bg-background;
+    @apply w-screen flex flex-row px-12 py-3 justify-between bg-background items-center;
 }
 
 .links{
     @apply flex flex-row;
 }
 
+.number{
+    @apply text-primary-button;
+}
+
 .link{
-    @apply pl-6 text-lg font-semibold text-primary-button hover:underline;
+    @apply pl-6 text-base text-lightSlate font-mono hover:underline;
 }
 
 .link:first-child{
