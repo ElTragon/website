@@ -101,13 +101,23 @@ module.exports = {
                   frontmatter {
                     title
                     date
-                    featuredImage { ... }
-                  }
+                    featuredImage {
+                      childImageSharp {
+                        gatsbyImageData(
+                          height: 627
+                          width: 1200
+                          placeholder: BLURRED
+                          transformOptions: { fit: CONTAIN }
+                          layout: FIXED
+                        )
+                      }
+                    }                  }
                 }
               }
             }`,
             output: "/rss.xml",
             title: "Mario Blog Feed",
+            match: "^/blog/",
           },
         ],
       },
