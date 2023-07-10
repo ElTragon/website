@@ -48,8 +48,8 @@
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
-    "prettier": "prettier --check './**/*.{js,jsx,md}'",
-    "prettier-fix": "prettier --write './**/*.{js,jsx,md}'",
+    "prettier": "prettier --check './**/*.{js,jsx,ts,tsx,md}'",
+    "prettier-fix": "prettier --write \"./**/*.@(js|jsx|ts|tsx|md)\"",
     "start": "gatsby develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",

@@ -1,0 +1,11 @@
+.socialLinkContainer {
+    @apply flex flex-row gap-3 my-3;
+}
+
+.socialLink {
+    @apply h-6 w-6 hover:text-lightSlate;
+}
+
+.link {
+    @apply hover:text-lightSlate;
+}

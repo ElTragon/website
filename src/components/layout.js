@@ -2,6 +2,7 @@ import * as React from "react"
 import { Link } from "gatsby"
 import "../global.css"
 import NavBar from "./NavBar"
+import Footer from "./Footer"
 
 const Layout = ({ location, title, children }) => {
   const rootPath = `${__PATH_PREFIX__}/`
@@ -28,11 +29,7 @@ const Layout = ({ location, title, children }) => {
 
       <div className="global-wrapper" data-is-root-path={isRootPath}>
         <main>{children}</main>
-        <footer>
-          © {new Date().getFullYear()}, Built by
-          {` `}
-          <a href="https://github.com/ElTragon">Mario Lopez</a>
-        </footer>
+        <Footer />
       </div>
     </div>
   )
