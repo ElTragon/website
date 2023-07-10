@@ -3,15 +3,17 @@ import IconGitHub from "./github"
 import IconLinkedin from "./linkedin"
 import IconTwitter from "./twiiter"
 
-const Icon = ({ name }) => {
+type Props = {
+  name: string
+}
+
+const Icon = ({ name }: Props) => {
   switch (name) {
-    case "GitHub":
+    case "github":
       return <IconGitHub />
-
-    case "Linkedin":
+    case "linkedin":
       return <IconLinkedin />
-
-    case "Twitter":
+    case "twitter":
       return <IconTwitter />
     default:
       return <IconGitHub />
