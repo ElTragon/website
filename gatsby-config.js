@@ -111,7 +111,8 @@ module.exports = {
                           layout: FIXED
                         )
                       }
-                    }                  }
+                    }                  
+                  }
                 }
               }
             }`,
