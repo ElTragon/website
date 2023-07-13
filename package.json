@@ -15,6 +15,7 @@
     "gatsby-plugin-image": "^3.10.0",
     "gatsby-plugin-manifest": "^5.10.0",
     "gatsby-plugin-sharp": "^5.10.0",
+    "gatsby-remark-autolink-headers": "^6.11.0",
     "gatsby-remark-images": "^7.10.0",
     "gatsby-remark-mermaid": "^4.0.0",
     "gatsby-remark-prismjs": "^7.10.0",
