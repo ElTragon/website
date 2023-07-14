@@ -1,6 +1,6 @@
 ---
 title: "Why and How: Markdowns"
-date: "2023-05-31T22:12:03.284Z"
+date: "2023-07-10T22:12:03.284Z"
 description: "Need a quick TLDR about Markdown files, in this blog I go over the use-cases of Markdown files, why they can be funky sometimes and provide a nice cheat sheet for Markdown files."
 featuredImage: "whatsTheDeal.png"
 ---
@@ -13,17 +13,19 @@ I'm sure I'll write a lot more interesting things in the future, but for now I'l
 
 # Why use markdown files
 
-Markdown is a markup language for creating simple formatted documents without the need for a GUI to make bullets, bold. It's meant to help you keep your hands on the keyboard and not on the mouse. Markdown files are often used on github for making docs. So it's good to know the basics for making READMEs and blogs if you are like me.
+Markdown is a markup language for creating simple formatted documents without the need for a GUI to make bullets, bold text. and anything else you might need to write a blog. It's meant to help you keep your hands on the keyboard and not on the mouse. Markdown files are often used on github for making docs. So it's good to know the basics for making READMEs and blogs if you are like me.
 
 # History and use-Case on markdown Files
 
 Markdown was made for writers not for coders. The main purpose of this technology to be easy to read, easy to write, and easy to convert to HTML. Markdown files help make all the blogs you skim possible, non-technical writers do not need to worry about `h1` tags where they write a blog instead they just need to write `# Title`.
 
-These files have simple formatting rules, is plain-text allowing it to work with git, and more importantly works with vim and emacs. It's developer friendly too, all IDEs work with it out the box. So programmers love it.
+These files have simple formatting rules and are plain-text allowing them it to work with git. This is they work with vim and emacs and all other IDEs work with it out the box. Programmers love it because they can use markdown files for websites, documents, notes, emails, and readmes.
+
+![veryNice](./veryNice.jpg)
 
 # Downsides to markdown files
 
-First of all Markdown is a super set of HTML. It's susceptible to Cross-Site Scripting attacks(XSS) because its unescaped. For more information why [click here to learn more](<https://github.com/showdownjs/showdown/wiki/Markdown's-XSS-Vulnerability-(and-how-to-mitigate-it)>).
+First of all Markdown is a super set of HTML. It's susceptible to Cross-Site Scripting attacks(XSS) because its unescaped. For more information why [click here to learn more](https://github.com/showdownjs/showdown/wiki/Markdown's-XSS-Vulnerability-(and-how-to-mitigate-it)).
 
 TLDR Avoid taking user information all together if you are using Markdown files. If you are do need to, then handle user info by using of HTML XSS filtering libraries, handle this on the server side not the client side, lastly you need to filter the output not the input.
 
