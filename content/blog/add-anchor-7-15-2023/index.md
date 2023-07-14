@@ -13,13 +13,13 @@ Then just follow Gatsby Documtaion here: [gatsby-remark-autolink-headers](https:
 
 # Why should you do this
 
-If you have worked with clients, then you know the best code is the code you don't have to write. Making this change is only good if and only if you think the user will want to share a section of blog. Beyond this, there are no other real reason why would should add this it your site.
+ Making this change is only good if you think the user will want to share a section of blog. Beyond this, there are no other real reason why would should add this it your site.
 
 # Simple change
 
 Like the documetion says here:  [gatsby-remark-autolink-headers](https://www.gatsbyjs.com/plugins/gatsby-remark-autolink-headers/)
 
-You just need to do the following change.
+You just need to make the following change:
 
 ```js
 // In your gatsby-config.js
@@ -64,6 +64,7 @@ module.exports = {
 
 ### Note order does matter
 If you are making using of `gatsby-remark-prismjs` then `gatsby-remark-autolink-headers` must come before it. Else you can just huck it in your options for `gatsby-transformer-remark`.
+
 ```js
 // In your gatsby-config.js
 module.exports = {
@@ -83,7 +84,6 @@ module.exports = {
 ## Some "Gotchas"
 
 For thoses new to [gatsby](https://www.gatsbyjs.com/), any time you edit the `gatsby-config.js` file then you need to build the site again. Then the anchor should pop up only on blogs genertaed from markdown files any time you hover over anything defined in elements. 
-`
 
 If you used a custom css on your site, the anchor could just blend into your background. To address this just change `fill="#359279"` in the svg to any color. Not gonna lie, I was stuck do to this for longer than I want admit.
 
@@ -91,4 +91,4 @@ If you want to me my full implementation of this site, then just click here: [Ma
 
 # Done
 
-A nice simple change to your site to help users share links. I find gatsby plugins a bit finicky from time to time, so stay tuned for more blogs about my misadventures with gatsby.
+A nice simple change to your site to help users share blogs. I find gatsby plugins a bit finicky from time to time, so stay tuned for more blogs about my misadventures with gatsby.
