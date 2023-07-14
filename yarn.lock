@@ -9095,17 +9095,10 @@ platform@^1.3.6:
   resolved "https://registry.npmjs.org/platform/-/platform-1.3.6.tgz"
   integrity sha512-fnWVljUchTro6RiCFvCXBbNhJc2NijN7oIQxbwsyL0buWJPG85v81ehlHI9fXrJsMNgTofEoWIQeClKpgxFLrg==
 
-playwright-core@^1.0.0, playwright-core@1.36.0:
+playwright-core@^1.0.0:
   version "1.36.0"
   resolved "https://registry.npmjs.org/playwright-core/-/playwright-core-1.36.0.tgz"
   integrity sha512-7RTr8P6YJPAqB+8j5ATGHqD6LvLLM39sYVNsslh78g8QeLcBs5750c6+msjrHUwwGt+kEbczBj1XB22WMwn+WA==
-
-playwright@^1.36.0:
-  version "1.36.0"
-  resolved "https://registry.npmjs.org/playwright/-/playwright-1.36.0.tgz"
-  integrity sha512-ODVOTp5WoRMxDJY3liMmC+wVNicc0cQB17gASvQ+zLBggVK9a2x3gdT5mbl7av+zomvtdirWOqqfD+O6qIrFgw==
-  dependencies:
-    playwright-core "1.36.0"
 
 postcss-calc@^8.2.3:
   version "8.2.4"
