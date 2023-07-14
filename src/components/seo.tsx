@@ -9,7 +9,7 @@ import * as React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import { getSrc } from "gatsby-plugin-image"
 
-const baseURL = "http://localhost:8000/"
+const baseURL = "https://mariolopezdev.com"
 
 type Props = {
   title: string

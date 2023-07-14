@@ -18,7 +18,7 @@ module.exports = {
       summary: `a full stack engineer building cool stuff.`,
     },
     description: `Follow this blog to stay up to date on programming news and learn new stuff.`,
-    siteUrl: `https://example.vom`,
+    siteUrl: `https://mariolopezdev.com/`,
     social: {
       twitter: `https://twitter.com/guythatcodes`,
       github: `https://github.com/ElTragon`,
