@@ -8,9 +8,6 @@
  * @type {import('gatsby').GatsbyConfig}
  */
 module.exports = {
-  flags: {
-    PARALLEL_QUERY_RUNNING: true
-  },
   siteMetadata: {
     title: `Mario's blog`,
     author: {
