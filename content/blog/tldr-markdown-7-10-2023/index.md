@@ -1,6 +1,6 @@
 ---
 title: "Why and How: Markdowns"
-date: "2023-05-31T22:12:03.284Z"
+date: "2023-07-10T22:12:03.284Z"
 description: "Need a quick TLDR about Markdown files, in this blog I go over the use-cases of Markdown files, why they can be funky sometimes and provide a nice cheat sheet for Markdown files."
 featuredImage: "whatsTheDeal.png"
 ---
@@ -13,7 +13,7 @@ I'm sure I'll write a lot more interesting things in the future, but for now I'l
 
 # Why use markdown files
 
-Markdown is a markup language for creating simple formatted documents without the need for a GUI to make bullets, bold. It's meant to help you keep your hands on the keyboard and not on the mouse. Markdown files are often used on github for making docs. So it's good to know the basics for making READMEs and blogs if you are like me.
+Markdown is a markup language for creating simple formatted documents without the need for a GUI to make bullets, bold text. and anything else you might need to write a blog. It's meant to help you keep your hands on the keyboard and not on the mouse. Markdown files are often used on github for making docs. So it's good to know the basics for making READMEs and blogs if you are like me.
 
 # History and use-Case on markdown Files
 
