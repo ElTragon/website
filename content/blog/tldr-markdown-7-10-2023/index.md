@@ -19,7 +19,9 @@ Markdown is a markup language for creating simple formatted documents without th
 
 Markdown was made for writers not for coders. The main purpose of this technology to be easy to read, easy to write, and easy to convert to HTML. Markdown files help make all the blogs you skim possible, non-technical writers do not need to worry about `h1` tags where they write a blog instead they just need to write `# Title`.
 
-These files have simple formatting rules, is plain-text allowing it to work with git, and more importantly works with vim and emacs. It's developer friendly too, all IDEs work with it out the box. So programmers love it.
+These files have simple formatting rules and are plain-text allowing them it to work with git. This is they work with vim and emacs and all other IDEs work with it out the box. Programmers love it because they can use markdown files for websites, documents, notes, emails, and readmes.
+
+![veryNice](./veryNice.jpg)
 
 # Downsides to markdown files
 
