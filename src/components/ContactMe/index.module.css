@@ -7,5 +7,17 @@
 }
 
 .label {
-    @apply block mb-2 text-sm font-medium ;
+    @apply block mb-2 text-sm font-medium;
+}
+
+.inputEmail{
+    @apply block shadow-sm border text-sm rounded-lg w-full p-2.5 text-text  mb-2;
+}
+
+.inputMessage{
+    @apply block p-2.5 w-full text-sm rounded-lg border text-text;
+}
+
+.sendButton{
+    @apply bg-accent text-white w-16 rounded-md mt-2;
 }
