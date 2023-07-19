@@ -59,6 +59,7 @@ export default function ContactMe() {
             id="email"
             className={css.inputEmail}
             placeholder="someone@hotmail.com"
+            onChange={handleChange}
             required
           />
         </div>
@@ -71,6 +72,7 @@ export default function ContactMe() {
           rows={4}
           cols={25}
           className={css.inputMessage}
+          onChange={handleChange}
           placeholder="Leave a message.."
         />
         <button className={css.sendButton}>Send</button>
