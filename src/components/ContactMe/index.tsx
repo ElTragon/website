@@ -15,6 +15,7 @@ export default function ContactMe() {
         name="contact-form"
         action="/thanks/"
         method="post"
+        netlify 
         data-netlify="true"
         data-netlify-honeypot="bot-field"
         className={css.container}
