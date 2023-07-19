@@ -3,7 +3,7 @@ const css = require("./index.module.css")
 
 import { navigate } from "gatsby-link"
 
-function encode(data) {
+function encode(data: Record<string, string>): string {
   return Object.keys(data)
     .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
     .join("&")
@@ -12,24 +12,34 @@ function encode(data) {
 export default function ContactMe() {
   const [state, setState] = React.useState({})
 
-  const handleChange = e => {
+  const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setState({ ...state, [e.target.name]: e.target.value })
   }
 
-  const handleSubmit = e => {
+  const handleChangeTextArea = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setState({ ...state, [e.target.name]: e.target.value })
+  }
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const form = e.target
+    const form = e.currentTarget as HTMLFormElement
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: encode({
-        "form-name": form.getAttribute("name"),
+        "form-name": form.getAttribute("name") || "",
         ...state,
       }),
     })
-      .then(() => navigate(form.getAttribute("action")))
+      .then(() => {
+        const action = form.getAttribute("action")
+        if (action) {
+          navigate(action)
+        }
+      })
       .catch(error => alert(error))
   }
+
   return (
     <>
       <h3 className={css.contactMe}>Contact Me</h3>
@@ -59,7 +69,7 @@ export default function ContactMe() {
             id="email"
             className={css.inputEmail}
             placeholder="someone@hotmail.com"
-            onChange={handleChange}
+            onChange={handleChangeEmail}
             required
           />
         </div>
@@ -72,7 +82,7 @@ export default function ContactMe() {
           rows={4}
           cols={25}
           className={css.inputMessage}
-          onChange={handleChange}
+          onChange={handleChangeTextArea}
           placeholder="Leave a message.."
         />
         <button className={css.sendButton}>Send</button>
