@@ -25,7 +25,7 @@ These files have simple formatting rules and are plain-text allowing them it to 
 
 # Downsides to markdown files
 
-First of all Markdown is a super set of HTML. It's susceptible to Cross-Site Scripting attacks(XSS) because its unescaped. For more information why [click here to learn more](https://github.com/showdownjs/showdown/wiki/Markdown's-XSS-Vulnerability-(and-how-to-mitigate-it)).
+First of all Markdown is a super set of HTML. It's susceptible to Cross-Site Scripting attacks(XSS) because its unescaped. For more information why [click here to learn more](<https://github.com/showdownjs/showdown/wiki/Markdown's-XSS-Vulnerability-(and-how-to-mitigate-it)>).
 
 TLDR Avoid taking user information all together if you are using Markdown files. If you are do need to, then handle user info by using of HTML XSS filtering libraries, handle this on the server side not the client side, lastly you need to filter the output not the input.
 

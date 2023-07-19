@@ -11,7 +11,6 @@ module.exports = {
       "primary-button": "#65c87c",
       "secondary-button": "#c7ebe1",
       accent: "#359279",
-
       Navy: "#0a192f",
       lightNavy: "#112240",
       lightestNavy: "#233554",
