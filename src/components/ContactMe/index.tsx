@@ -25,6 +25,7 @@ export default function ContactMe() {
           </label>
           <input
             type="email"
+            name="email"
             id="email"
             className={css.inputEmail}
             placeholder="someone@hotmail.com"
@@ -36,6 +37,7 @@ export default function ContactMe() {
         </label>
         <textarea
           id="message"
+          name="message"
           rows={4}
           cols={25}
           className={css.inputMessage}
