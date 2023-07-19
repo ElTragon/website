@@ -21,6 +21,7 @@ export default function ContactMe() {
         className={css.container}
       >
         <div className="mb-6">
+        <input type="hidden" name="form-name" value="contactForm" />
           <label htmlFor="email" className={css.label}>
             Your email:
           </label>
