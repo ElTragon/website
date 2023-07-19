@@ -15,17 +15,18 @@ export default function ContactMe() {
         name="contact-form"
         action="/thanks/"
         method="post"
-        netlify 
+        netlify
         data-netlify="true"
         data-netlify-honeypot="bot-field"
         className={css.container}
       >
         <div className="mb-6">
           <input type="hidden" name="form-name" value="contact" />
-          <label htmlFor="email" className={css.label}>
+          <label hidden htmlFor="email" className={css.label}>
             Your email:
           </label>
           <input
+            hidden
             type="email"
             name="email"
             id="email"
@@ -34,10 +35,11 @@ export default function ContactMe() {
             required
           />
         </div>
-        <label htmlFor="message" className={css.label}>
+        <label hidden htmlFor="message" className={css.label}>
           Your message:
         </label>
         <textarea
+          hidden
           id="message"
           name="message"
           rows={4}
