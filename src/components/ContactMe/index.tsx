@@ -1,7 +1,35 @@
 import React from "react"
 const css = require("./index.module.css")
 
+import { navigate } from "gatsby-link"
+
+function encode(data) {
+  return Object.keys(data)
+    .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+    .join("&")
+}
+
 export default function ContactMe() {
+  const [state, setState] = React.useState({})
+
+  const handleChange = e => {
+    setState({ ...state, [e.target.name]: e.target.value })
+  }
+
+  const handleSubmit = e => {
+    e.preventDefault()
+    const form = e.target
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: encode({
+        "form-name": form.getAttribute("name"),
+        ...state,
+      }),
+    })
+      .then(() => navigate(form.getAttribute("action")))
+      .catch(error => alert(error))
+  }
   return (
     <>
       <h3 className={css.contactMe}>Contact Me</h3>
@@ -15,18 +43,17 @@ export default function ContactMe() {
         name="contact-form"
         action="/thanks/"
         method="post"
-        netlify
         data-netlify="true"
         data-netlify-honeypot="bot-field"
+        onSubmit={handleSubmit}
         className={css.container}
       >
         <div className="mb-6">
           <input type="hidden" name="form-name" value="contact" />
-          <label hidden htmlFor="email" className={css.label}>
+          <label htmlFor="email" className={css.label}>
             Your email:
           </label>
           <input
-            hidden
             type="email"
             name="email"
             id="email"
@@ -35,11 +62,10 @@ export default function ContactMe() {
             required
           />
         </div>
-        <label hidden htmlFor="message" className={css.label}>
+        <label htmlFor="message" className={css.label}>
           Your message:
         </label>
         <textarea
-          hidden
           id="message"
           name="message"
           rows={4}
