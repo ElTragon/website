@@ -1,8 +1,7 @@
-import React, { useState } from "react"
-const css = require("./index.module.css")
+import React from "react";
+const css = require("./index.module.css");
 
 export default function ContactMe() {
-  const [viewModule, setViewModule] = useState<boolean>(false)
 
   return (
     <>
