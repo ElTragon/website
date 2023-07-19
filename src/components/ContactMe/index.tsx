@@ -14,7 +14,7 @@ export default function ContactMe() {
 
       <form
         name="contact-form"
-        action="/thanks"
+        action="/thanks/"
         method="post"
         data-netlify="true"
         data-netlify-honeypot="bot-field"
