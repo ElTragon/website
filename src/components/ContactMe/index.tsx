@@ -1,8 +1,7 @@
-import React from "react";
-const css = require("./index.module.css");
+import React from "react"
+const css = require("./index.module.css")
 
 export default function ContactMe() {
-
   return (
     <>
       <h3 className={css.contactMe}>Contact Me</h3>
@@ -21,7 +20,7 @@ export default function ContactMe() {
         className={css.container}
       >
         <div className="mb-6">
-        <input type="hidden" name="form-name" value="contactForm" />
+          <input type="hidden" name="form-name" value="contact" />
           <label htmlFor="email" className={css.label}>
             Your email:
           </label>
