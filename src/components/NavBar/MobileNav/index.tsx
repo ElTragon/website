@@ -3,6 +3,8 @@ import { useState } from "react"
 import { IoIosMenu, IoIosClose } from "react-icons/io"
 import { NavLinks } from "../constants"
 import { Link } from "gatsby"
+import Module from "../../Overlay"
+import Overlay from "../../Overlay"
 const css = require("./index.module.css")
 
 type Props = {
@@ -60,7 +62,18 @@ const MobileNav = ({ logoSrc }: Props) => {
   const onClick = () => setOpenMenu(prev => !prev)
 
   if (openMenu) {
-    return <Menu onClick={onClick} logoSrc={logoSrc} />
+    // return <Menu onClick={onClick} logoSrc={logoSrc} />
+    return (
+      <Overlay onClick={onClick} logoSrc={logoSrc}>
+        <div className={css.links}>
+          {NavLinks.map((link, i) => (
+            <a key={i} className={css.link} href={link.routeTo}>
+              {link.name}
+            </a>
+          ))}
+        </div>
+      </Overlay>
+    )
   }
 
   return (
