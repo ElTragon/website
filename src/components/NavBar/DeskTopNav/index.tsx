@@ -1,5 +1,4 @@
 import * as React from "react"
-import { Link } from "gatsby"
 import { NavLinks } from "../constants"
 const css = require("./index.module.css")
 
