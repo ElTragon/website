@@ -5,7 +5,35 @@ import Bio from "../components/Bio"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 
-const BlogIndex = ({ data, location }) => {
+interface Frontmatter {
+  date: string
+  title: string
+  description?: string
+}
+
+interface PostNode {
+  excerpt: string
+  fields: {
+    slug: string
+  }
+  frontmatter: Frontmatter
+}
+
+interface BlogIndexProps {
+  data: {
+    site: {
+      siteMetadata: {
+        title: string
+      }
+    }
+    allMarkdownRemark: {
+      nodes: PostNode[]
+    }
+  }
+  location: Location
+}
+
+const BlogIndex: React.FC<BlogIndexProps> = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata?.title || `Title`
   const posts = data.allMarkdownRemark.nodes
 
@@ -68,7 +96,9 @@ export default BlogIndex
  *
  * See: https://www.gatsbyjs.com/docs/reference/built-in-components/gatsby-head/
  */
-export const Head = () => <Seo title="All posts" />
+export const Head: React.FC = () => (
+  <Seo title="All posts" description={"Check out all my blogs"} />
+)
 
 export const pageQuery = graphql`
   {
