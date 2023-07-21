@@ -2,6 +2,10 @@
     @apply w-screen flex flex-row px-12 py-3 justify-between bg-background items-center;
 }
 
+.logo{
+    @apply w-8 h-8;
+}
+
 .links{
     @apply flex flex-row;
 }
