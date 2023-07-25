@@ -107,7 +107,7 @@ A binary search as Big O runtime of `O(Log(n))`. It works by dividing the array 
 
 # Time Complexity vs Space Complexity
 
-Big O notation is not justed used when discussing how fast a algorithms is, it can also be used when discussing how memory efficient algorithms are. For example if you are tasked with sorting an array of numbers do you create a new array or sort the elements in the original array. If you make a copy of the array then your algorithm would have a space complexity of `O(n)`. If you sorted the array without making a copy then your algorithm would have a space complexity of `O(1)` also known as constant space complexity.
+Big O notation is not justed used when discussing how fast a algorithms is, it can also be used when discussing how memory efficient algorithms are. For example if you are tasked with sorting an array of numbers do you create a new array or sort the elements in the original array. If you make a copy of the array then your algorithm would have a space complexity of `O(n)`. If you sorted the array in place without making a copy then your algorithm would have a space complexity of `O(1)` also known as constant space complexity.
 
 ### Inconsistent naming
 
