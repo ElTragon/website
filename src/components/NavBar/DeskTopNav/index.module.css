@@ -1,5 +1,5 @@
 .container{
-    @apply w-screen flex flex-row px-12 py-3 justify-between bg-background items-center;
+    @apply flex flex-row px-12 py-3 justify-between bg-background items-center;
 }
 
 .logo{
