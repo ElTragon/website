@@ -1,9 +1,7 @@
 import * as React from "react"
 import { useState } from "react"
-import { IoIosMenu, IoIosClose } from "react-icons/io"
+import { IoIosMenu } from "react-icons/io"
 import { NavLinks } from "../constants"
-import { Link } from "gatsby"
-import Module from "../../Overlay"
 import Overlay from "../../Overlay"
 const css = require("./index.module.css")
 
@@ -31,38 +29,12 @@ const MenuButton = ({ onClick }: MenuProps) => {
   )
 }
 
-const Menu = ({ onClick, logoSrc }: MenuProps & Props) => {
-  return (
-    <div className={css.menuContainer}>
-      <div className={css.container}>
-        <img
-          src={logoSrc}
-          alt="logo"
-          style={{ width: "30px", height: "30px" }}
-        />
-        <button className={css.menuButton} onClick={onClick}>
-          <IoIosClose size={doubleSize} />
-        </button>
-      </div>
-
-      <div className={css.links}>
-        {NavLinks.map((link, i) => (
-          <a key={i} className={css.link} href={link.routeTo}>
-            {link.name}
-          </a>
-        ))}
-      </div>
-    </div>
-  )
-}
-
 const MobileNav = ({ logoSrc }: Props) => {
   const [openMenu, setOpenMenu] = useState(false)
 
   const onClick = () => setOpenMenu(prev => !prev)
 
   if (openMenu) {
-    // return <Menu onClick={onClick} logoSrc={logoSrc} />
     return (
       <Overlay onClick={onClick} logoSrc={logoSrc}>
         <div className={css.links}>
@@ -78,7 +50,7 @@ const MobileNav = ({ logoSrc }: Props) => {
 
   return (
     <div className={css.container}>
-      <img src={logoSrc} alt="logo" style={{ width: "30px", height: "30px" }} />
+      <img src={logoSrc} alt="logo" className={css.logo} />
       <MenuButton onClick={onClick} />
     </div>
   )

@@ -1,5 +1,6 @@
 import React from "react"
 const css = require("./index.module.css")
+import { Link } from "gatsby"
 
 type Props = {
   title: string
@@ -16,14 +17,14 @@ export default function BlogPreview({
 }: Props) {
   return (
     <div className={css.container}>
-      <a href={linkTo} target="_blank" className={css.header}>
+      <Link to={linkTo} target="_blank" className={css.header}>
         {title}
-      </a>
+      </Link>
 
       <p className={css.description}>{description}</p>
-      <a className={css.link} href={linkTo} target="_blank">
+      <Link className={css.link} to={linkTo} target="_blank">
         Read More
-      </a>
+      </Link>
     </div>
   )
 }

@@ -9,7 +9,7 @@ type Props = {
 const DeskTopNav = ({ logoSrc }: Props) => {
   return (
     <div className={css.container}>
-      <img src={logoSrc} alt="logo" style={{ width: "30px", height: "30px" }} />
+      <img src={logoSrc} alt="logo" className={css.logo} />
 
       <div className={css.links}>
         {NavLinks.map((link, i) => (

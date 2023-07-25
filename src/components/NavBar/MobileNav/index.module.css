@@ -2,6 +2,10 @@
     @apply px-6 z-10 w-full bg-background flex flex-row justify-between items-center;
 }
 
+.logo{
+    @apply w-8 h-8;
+}
+
 .links{
     @apply flex flex-col gap-6 items-center pt-8;
 }
@@ -9,7 +13,6 @@
 .link{
     @apply text-lg text-accent;
 }
-
 
 .menuContainer{
     @apply fixed z-10 h-screen w-screen bg-background;
