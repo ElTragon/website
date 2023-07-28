@@ -17,6 +17,7 @@
     "gatsby-plugin-netlify": "^5.1.0",
     "gatsby-plugin-robots-txt": "^1.8.0",
     "gatsby-plugin-sharp": "^5.10.0",
+    "gatsby-plugin-sitemap": "^6.11.0",
     "gatsby-remark-autolink-headers": "^6.11.0",
     "gatsby-remark-images": "^7.10.0",
     "gatsby-remark-mermaid": "^4.0.0",

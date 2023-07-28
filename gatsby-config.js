@@ -28,6 +28,68 @@ module.exports = {
     `gatsby-plugin-postcss`,
     `gatsby-plugin-image`,
     {
+      resolve: `gatsby-plugin-sitemap`,
+      options: {
+        exclude: ["/404", "/thanks"],
+        query: `
+        {
+          site {
+            siteMetadata {
+              url
+            }
+          }
+          allMdx(sort: {fields: frontmatter___date, order: DESC}, filter: {slug: {glob: "!*wip*"}}) {
+            nodes {
+              frontmatter {
+                date(formatString: "YYYY-MM-DD")
+              }
+              slug
+            }
+          }
+        }
+      `,
+        resolveSiteUrl: ({
+          site: {
+            siteMetadata: { url },
+          },
+        }) => url,
+        resolvePages: ({ allMdx: { nodes: mdxs } }) => {
+          const posts = mdxs.map(mdx => {
+            return {
+              path: `/blogs/${mdx.slug}`,
+              lastmod: mdx.frontmatter.date,
+              changefreq: "weekly",
+              priority: 0.7,
+            }
+          })
+
+          const home = {
+            path: "/",
+            lastmod: posts[0].lastmod,
+            changefreq: "weekly",
+            priority: 0.3,
+          }
+
+          const blog = {
+            path: "/blogs",
+            lastmod: posts[0].lastmod,
+            changefreq: "weekly",
+            priority: 0.3,
+          }
+
+          return [...posts, home, blog]
+        },
+        serialize: ({ path, lastmod, changefreq, priority }) => {
+          return {
+            url: path,
+            lastmod,
+            changefreq,
+            priority,
+          }
+        },
+      },
+    },
+    {
       resolve: `gatsby-source-filesystem`,
       options: {
         path: `${__dirname}/content/blog`,
