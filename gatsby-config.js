@@ -7,6 +7,8 @@
 /**
  * @type {import('gatsby').GatsbyConfig}
  */
+const site = `https://mariolopezdev.com/`
+
 module.exports = {
   siteMetadata: {
     title: `Mario's blog`,
@@ -15,7 +17,7 @@ module.exports = {
       summary: `a full stack engineer building cool stuff.`,
     },
     description: `Follow this blog to stay up to date on programming news and learn new stuff.`,
-    siteUrl: `https://mariolopezdev.com/`,
+    siteUrl: site,
     social: {
       twitter: `https://twitter.com/guythatcodes`,
       github: `https://github.com/ElTragon`,
@@ -30,49 +32,47 @@ module.exports = {
     {
       resolve: `gatsby-plugin-sitemap`,
       options: {
-        exclude: ["/404", "/thanks"],
         query: `
         {
           site {
             siteMetadata {
-              url
+              siteUrl
             }
           }
-          allMdx(sort: {fields: frontmatter___date, order: DESC}, filter: {slug: {glob: "!*wip*"}}) {
+          allMarkdownRemark(sort: {frontmatter: {date: DESC}}) {
             nodes {
-              frontmatter {
-                date(formatString: "YYYY-MM-DD")
+              fields {
+                slug
               }
-              slug
+              frontmatter {
+                title
+                date       
+              }
             }
           }
         }
       `,
-        resolveSiteUrl: ({
-          site: {
-            siteMetadata: { url },
-          },
-        }) => url,
-        resolvePages: ({ allMdx: { nodes: mdxs } }) => {
+        resolveSiteUrl: () => site,
+        resolvePages: ({ allMarkdownRemark: { nodes: mdxs } }) => {
           const posts = mdxs.map(mdx => {
             return {
-              path: `/blogs/${mdx.slug}`,
+              path: `/blogs${mdx.fields.slug}`,
               lastmod: mdx.frontmatter.date,
-              changefreq: "weekly",
+              changefreq: "never",
               priority: 0.7,
             }
           })
 
           const home = {
             path: "/",
-            lastmod: posts[0].lastmod,
+            lastmod: posts[0].date,
             changefreq: "weekly",
             priority: 0.3,
           }
 
           const blog = {
             path: "/blogs",
-            lastmod: posts[0].lastmod,
+            lastmod: posts[0].date,
             changefreq: "weekly",
             priority: 0.3,
           }
