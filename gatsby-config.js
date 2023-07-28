@@ -7,6 +7,8 @@
 /**
  * @type {import('gatsby').GatsbyConfig}
  */
+const site = `https://mariolopezdev.com/`
+
 module.exports = {
   siteMetadata: {
     title: `Mario's blog`,
@@ -15,7 +17,7 @@ module.exports = {
       summary: `a full stack engineer building cool stuff.`,
     },
     description: `Follow this blog to stay up to date on programming news and learn new stuff.`,
-    siteUrl: `https://mariolopezdev.com/`,
+    siteUrl: site,
     social: {
       twitter: `https://twitter.com/guythatcodes`,
       github: `https://github.com/ElTragon`,
@@ -27,6 +29,66 @@ module.exports = {
     `gatsby-plugin-netlify`,
     `gatsby-plugin-postcss`,
     `gatsby-plugin-image`,
+    {
+      resolve: `gatsby-plugin-sitemap`,
+      options: {
+        query: `
+        {
+          site {
+            siteMetadata {
+              siteUrl
+            }
+          }
+          allMarkdownRemark(sort: {frontmatter: {date: DESC}}) {
+            nodes {
+              fields {
+                slug
+              }
+              frontmatter {
+                title
+                date       
+              }
+            }
+          }
+        }
+      `,
+        resolveSiteUrl: () => site,
+        resolvePages: ({ allMarkdownRemark: { nodes: mdxs } }) => {
+          const posts = mdxs.map(mdx => {
+            return {
+              path: `/blogs${mdx.fields.slug}`,
+              lastmod: mdx.frontmatter.date,
+              changefreq: "never",
+              priority: 0.7,
+            }
+          })
+
+          const home = {
+            path: "/",
+            lastmod: posts[0].date,
+            changefreq: "weekly",
+            priority: 0.3,
+          }
+
+          const blog = {
+            path: "/blogs",
+            lastmod: posts[0].date,
+            changefreq: "weekly",
+            priority: 0.3,
+          }
+
+          return [...posts, home, blog]
+        },
+        serialize: ({ path, lastmod, changefreq, priority }) => {
+          return {
+            url: path,
+            lastmod,
+            changefreq,
+            priority,
+          }
+        },
+      },
+    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
