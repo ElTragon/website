@@ -28,7 +28,7 @@ const NavBar = () => {
     `
   )
 
-  const logoSrc = logo.childImageSharp.fixed.src || ""
+  const logoSrc = (logo.childImageSharp.fixed.src as string) || ""
 
   return (
     <>
