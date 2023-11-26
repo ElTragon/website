@@ -1,6 +1,6 @@
 ---
 title: "Don't forget about soft skills"
-date: "2023-07-21T22:12:03.284Z"
+date: "2023-11-25T22:12:03.284Z"
 description: "Soft skills matter in tech; you can even use them to skip the technical interview"
 featuredImage: "doNotBeWeird.png"
 ---
