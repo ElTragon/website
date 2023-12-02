@@ -19,7 +19,7 @@ const ThanksPage: React.FC<PageProps<NotFoundPageData>> = ({
   const siteTitle = data.site.siteMetadata.title
 
   return (
-    <Layout location={location} title={siteTitle}>
+    <Layout>
       <h1>Thank you</h1>
       <p>Your message has been sent.</p>
       <a href={"/"} target="_blank" rel="noreferrer">
