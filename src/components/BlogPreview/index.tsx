@@ -17,7 +17,7 @@ export default function BlogPreview({
 }: Props) {
   return (
     <div className={css.container}>
-      <Link to={linkTo} target="_blank" className={css.header}>
+      <Link className={css.header} to={linkTo} target="_blank">
         {title}
       </Link>
 

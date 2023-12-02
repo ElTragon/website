@@ -31,13 +31,13 @@ const Footer = () => {
           )
         })}
       </div>
-      <div className={css.builtByContainter}>
+      <div className={css.builtByContainer}>
         © {new Date().getFullYear()}, Built by
         {` `}
         <a className={css.link} href="https://github.com/ElTragon">
           Mario Lopez
         </a>
-      </div>{" "}
+      </div>
     </footer>
   )
 }
