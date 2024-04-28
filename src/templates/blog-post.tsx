@@ -10,9 +10,9 @@ const BlogPostTemplate = ({
   location,
 }) => {
   const siteTitle = site.siteMetadata?.title || `Title`
-
+  console.log("data", post)
   return (
-    <Layout location={location} title={siteTitle}>
+    <Layout>
       <article
         className="blog-post"
         itemScope

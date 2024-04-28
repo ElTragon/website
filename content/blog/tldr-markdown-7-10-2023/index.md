@@ -184,10 +184,6 @@ This is a paragraph.
 * Green
 * Blue
 
-- Red
-- Green
-- Blue
-
 ```markdown
 - Red
 - Green
@@ -196,10 +192,6 @@ This is a paragraph.
 * Red
 * Green
 * Blue
-
-- Red
-- Green
-- Blue
 ```
 
 - `code goes` here in this line
