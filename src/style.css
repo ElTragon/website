@@ -179,6 +179,7 @@ ol {
   margin-bottom: var(--spacing-8);
   list-style-position: outside;
   list-style-image: none;
+  list-style: disc;
 }
 
 ul li,

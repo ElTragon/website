@@ -1,12 +1,8 @@
 import * as React from "react"
 import { Link, graphql } from "gatsby"
-
 import Bio from "../components/Bio"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
-import { getSrc } from "gatsby-plugin-image"
-import { directiveSanitizer } from "mermaid/dist/utils"
-import BlogPreview from "../components/BlogPreview"
 import AboutMe from "../components/AboutMe"
 import NewestBlog from "../components/NewestBlog"
 import ContactMe from "../components/ContactMe"
