@@ -1,45 +1,42 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
+import IconCopy from "../Icons/copy"
+
 const css = require("./index.module.css")
 
-import { navigate } from "gatsby-link"
-
-function encode(data: Record<string, string>): string {
-  return Object.keys(data)
-    .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
-    .join("&")
-}
-
 export default function ContactMe() {
-  const [state, setState] = React.useState({})
+  const [success, setSuccess] = useState(false)
 
-  const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setState({ ...state, [e.target.name]: e.target.value })
+  async function copyToClipboard(text: string): Promise<boolean> {
+    try {
+      await navigator.clipboard.writeText(text)
+      setSuccess(true)
+      return true
+    } catch (err) {
+      console.error("Failed to copy text: ", err)
+      return false
+    }
   }
 
-  const handleChangeTextArea = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setState({ ...state, [e.target.name]: e.target.value })
+  function waitTwoSeconds(): Promise<void> {
+    return new Promise(resolve => setTimeout(resolve, 2000))
   }
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    const form = e.currentTarget as HTMLFormElement
-    fetch("/", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: encode({
-        "form-name": form.getAttribute("name") || "",
-        ...state,
-      }),
-    })
-      .then(() => {
-        const action = form.getAttribute("action")
-        if (action) {
-          navigate(action)
-        }
-      })
-      .catch(error => alert(error))
+  async function popUpLogic(): Promise<boolean> {
+    try {
+      await waitTwoSeconds()
+      setSuccess(false)
+      return true
+    } catch (err) {
+      console.error("Failed to copy text: ", err)
+      return false
+    }
   }
 
+  useEffect(() => {
+    if (success == true) {
+      popUpLogic()
+    }
+  }, [success])
   return (
     <>
       <h3 className={css.contactMe}>Contact Me</h3>
@@ -49,44 +46,19 @@ export default function ContactMe() {
         hi. I'll try my best to get back to you.
       </div>
 
-      <form
-        name="contact-form"
-        action="/thanks/"
-        method="post"
-        data-netlify="true"
-        data-netlify-honeypot="bot-field"
-        onSubmit={handleSubmit}
-        className={css.container}
+      <div
+        className={css.email}
+        onClick={() => copyToClipboard("m9lopeztri@gmail.com")}
       >
-        <div className="mb-6">
-          <input type="hidden" name="form-name" value="contact" />
-          <label htmlFor="email" className={css.label}>
-            Your email:
-          </label>
-          <input
-            type="email"
-            name="email"
-            id="email"
-            className={css.inputEmail}
-            placeholder="someone@hotmail.com"
-            onChange={handleChangeEmail}
-            required
-          />
-        </div>
-        <label htmlFor="message" className={css.label}>
-          Your message:
-        </label>
-        <textarea
-          id="message"
-          name="message"
-          rows={4}
-          cols={25}
-          className={css.inputMessage}
-          onChange={handleChangeTextArea}
-          placeholder="Leave a message.."
-        />
-        <button className={css.sendButton}>Send</button>
-      </form>
+        m9lopeztri@gmail.com
+        <button>
+          <IconCopy />
+        </button>
+      </div>
+
+      <div className={`${css.popup} ${!success ? css.hide : ""}`}>
+        m9lopeztri@gmail.com was copied
+      </div>
     </>
   )
 }
