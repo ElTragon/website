@@ -27,7 +27,7 @@
 }
 
 .email{
-    @apply bg-lightSlate text-background inline-flex gap-2 border-2 rounded-md border-green px-4 py-2;
+    @apply bg-background text-green inline-flex gap-2 border-2 rounded-md border-accent px-4 py-2 items-center;
 }
 
 @keyframes slideIn {
@@ -53,7 +53,7 @@
   }
 
 .popup {
-    @apply fixed bottom-4 right-4 bg-lightSlate text-background border-2 border-green px-4 py-2 rounded-l-lg rounded-tr-lg shadow-lg;
+    @apply fixed bottom-4 right-4 bg-background text-green border-4 border-accent px-4 py-2 rounded-l-3xl rounded-tr-3xl shadow-lg;
     animation: slideIn 0.3s ease-out;
 
 }

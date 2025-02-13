@@ -10,6 +10,9 @@ const IconCopy = () => (
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 64 64"
     enable-background="new 0 0 64 64"
+    stroke="currentColor"
+    strokeWidth="2"
+
   >
     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
     <g

@@ -5,11 +5,14 @@ const css = require("./index.module.css")
 
 export default function ContactMe() {
   const [success, setSuccess] = useState(false)
+  const [showPopup, setShowPopup] = useState(false) // Controls actual rendering
+
 
   async function copyToClipboard(text: string): Promise<boolean> {
     try {
       await navigator.clipboard.writeText(text)
       setSuccess(true)
+      setShowPopup(true)
       return true
     } catch (err) {
       console.error("Failed to copy text: ", err)
@@ -51,14 +54,15 @@ export default function ContactMe() {
         onClick={() => copyToClipboard("m9lopeztri@gmail.com")}
       >
         m9lopeztri@gmail.com
-        <button>
           <IconCopy />
-        </button>
       </div>
 
+      {showPopup && ( // Ensures the popup doesn't render at all initially
       <div className={`${css.popup} ${!success ? css.hide : ""}`}>
         m9lopeztri@gmail.com was copied
       </div>
+    )}
+
     </>
   )
 }
