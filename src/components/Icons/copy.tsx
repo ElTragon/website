@@ -12,7 +12,6 @@ const IconCopy = () => (
     enable-background="new 0 0 64 64"
     stroke="currentColor"
     strokeWidth="2"
-
   >
     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
     <g
