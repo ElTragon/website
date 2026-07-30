@@ -4,6 +4,11 @@
   "description": "Mario Lopez, the software engineer crafting responsive sites and web-apps. Stay on the cutting edge of innovation and join Mario on his journey through the ever-evolving world of technology.",
   "version": "0.1.0",
   "author": "Mario Lopez <m9lopeztri@gmail.com>",
+  "packageManager": "npm@10.9.8",
+  "engines": {
+    "node": ">=22.23.1 <23",
+    "npm": ">=10.9.8 <11"
+  },
   "bugs": {
     "url": "https://github.com/gatsbyjs/gatsby/issues"
   },
@@ -11,36 +16,33 @@
     "@fontsource/merriweather": "^4.5.14",
     "@fontsource/montserrat": "^4.5.14",
     "dotenv": "^16.3.1",
-    "gatsby": "^5.10.0",
-    "gatsby-plugin-feed": "^5.10.0",
-    "gatsby-plugin-google-gtag": "^5.11.0",
-    "gatsby-plugin-image": "^3.10.0",
-    "gatsby-plugin-manifest": "^5.10.0",
-    "gatsby-plugin-netlify": "^5.1.0",
+    "gatsby": "^5.16.1",
+    "gatsby-plugin-feed": "^5.16.0",
+    "gatsby-plugin-google-gtag": "^5.16.0",
+    "gatsby-plugin-image": "^3.16.0",
+    "gatsby-plugin-manifest": "^5.16.0",
+    "gatsby-plugin-netlify": "^5.1.1",
     "gatsby-plugin-robots-txt": "^1.8.0",
-    "gatsby-plugin-sharp": "^5.10.0",
-    "gatsby-plugin-sitemap": "^6.11.0",
-    "gatsby-remark-autolink-headers": "^6.11.0",
-    "gatsby-remark-images": "^7.10.0",
-    "gatsby-remark-mermaid": "^4.0.0",
-    "gatsby-remark-prismjs": "^7.10.0",
-    "gatsby-remark-responsive-iframe": "^6.10.0",
-    "gatsby-source-filesystem": "^5.10.0",
-    "gatsby-transformer-remark": "^6.10.0",
-    "gatsby-transformer-sharp": "^5.10.0",
+    "gatsby-plugin-sharp": "^5.16.0",
+    "gatsby-plugin-sitemap": "^6.16.0",
+    "gatsby-remark-autolink-headers": "^6.16.0",
+    "gatsby-remark-images": "^7.16.0",
+    "gatsby-remark-prismjs": "^7.16.0",
+    "gatsby-remark-responsive-iframe": "^6.16.0",
+    "gatsby-source-filesystem": "^5.16.0",
+    "gatsby-transformer-remark": "^6.16.0",
+    "gatsby-transformer-sharp": "^5.16.0",
     "mermaid": "^10.2.0",
-    "playwright": "^1.36.2",
-    "playwright-chromium": "^1.36.0",
-    "prismjs": "^1.29.0",
-    "react": "^18.1.0",
-    "react-dom": "^18.1.0",
+    "prismjs": "^1.30.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "react-icons": "^4.9.0"
   },
   "devDependencies": {
-    "@playwright/test": "^1.36.0",
+    "@playwright/test": "1.62.1",
     "autoprefixer": "^10.4.14",
-    "gatsby-plugin-postcss": "^6.10.0",
-    "postcss": "^8.4.24",
+    "gatsby-plugin-postcss": "^6.16.0",
+    "postcss": "^8.5.25",
     "prettier": "2.8.8",
     "tailwindcss": "^3.3.2"
   },
@@ -54,6 +56,7 @@
     "url": "git+https://github.com/gatsbyjs/gatsby-starter-blog.git"
   },
   "scripts": {
+    "audit:production": "npm audit --omit=dev --audit-level=critical",
     "build": "gatsby build",
     "develop": "gatsby develop",
     "prettier": "prettier --check './**/*.{js,jsx,ts,tsx,md}'",
@@ -61,6 +64,8 @@
     "start": "gatsby develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+    "test": "npm run build && npm run test:e2e",
+    "pretest:e2e": "playwright install --only-shell chromium",
+    "test:e2e": "playwright test"
   }
 }
