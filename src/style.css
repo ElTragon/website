@@ -65,7 +65,6 @@ Primary Button: #65c87c (RGB: 101, 200, 124)
 Secondary Button: #c7ebe1 (RGB: 199, 235, 225)
 Accent: #359279 (RGB: 53, 146, 121) */
 
-
 /* HTML elements */
 
 *,
@@ -230,6 +229,17 @@ table {
 
 table thead tr th {
   border-bottom: 1px solid var(--color-accent);
+}
+
+.mermaid {
+  margin-bottom: var(--spacing-8);
+  overflow-x: auto;
+  text-align: center;
+}
+
+.mermaid svg {
+  height: auto;
+  max-width: 100%;
 }
 
 /* Link */

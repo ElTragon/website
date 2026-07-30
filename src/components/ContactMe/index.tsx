@@ -7,7 +7,6 @@ export default function ContactMe() {
   const [success, setSuccess] = useState(false)
   const [showPopup, setShowPopup] = useState(false) // Controls actual rendering
 
-
   async function copyToClipboard(text: string): Promise<boolean> {
     try {
       await navigator.clipboard.writeText(text)
@@ -54,15 +53,14 @@ export default function ContactMe() {
         onClick={() => copyToClipboard("m9lopeztri@gmail.com")}
       >
         m9lopeztri@gmail.com
-          <IconCopy />
+        <IconCopy />
       </div>
 
       {showPopup && ( // Ensures the popup doesn't render at all initially
-      <div className={`${css.popup} ${!success ? css.hide : ""}`}>
-        m9lopeztri@gmail.com was copied
-      </div>
-    )}
-
+        <div className={`${css.popup} ${!success ? css.hide : ""}`}>
+          m9lopeztri@gmail.com was copied
+        </div>
+      )}
     </>
   )
 }

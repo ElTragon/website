@@ -32,16 +32,25 @@ If you use this code please thank her.
     git clone https://github.com/ElTragon/website
     ```
 
-2.  **Start developing.**
+2.  **Use the project runtime.**
 
-    Navigate into the site’s directory and start it up.
+    This project uses Node.js and npm versions declared in `.nvmrc` and
+    `package.json`. With nvm installed:
 
     ```shell
     cd website/
-    gatsby develop
+    nvm install
+    nvm use
+    npm ci
     ```
 
-3.  **Open the source code and start editing!**
+3.  **Start developing.**
+
+    ```shell
+    npm run develop
+    ```
+
+4.  **Open the source code and start editing!**
 
     Your site is now running at `http://localhost:8000`!
 
