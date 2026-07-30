@@ -1,12 +1,14 @@
 import * as React from "react"
-import { Link, graphql } from "gatsby"
+import { Link, graphql, PageProps } from "gatsby"
 
 import Bio from "../components/Bio"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
+import { compareBlogPostsDescending } from "../utils/blog-routes"
 
 interface Frontmatter {
   date: string
+  formattedDate: string
   title: string
   description?: string
 }
@@ -15,27 +17,21 @@ interface PostNode {
   excerpt: string
   fields: {
     slug: string
+    legacyPath: string
   }
   frontmatter: Frontmatter
 }
 
-interface BlogIndexProps {
-  data: {
-    site: {
-      siteMetadata: {
-        title: string
-      }
-    }
-    allMarkdownRemark: {
-      nodes: PostNode[]
-    }
+interface BlogIndexData {
+  allMarkdownRemark: {
+    nodes: PostNode[]
   }
-  location: Location
 }
 
-const BlogIndex: React.FC<BlogIndexProps> = ({ data, location }) => {
-  const siteTitle = data.site.siteMetadata?.title || `Title`
-  const posts = data.allMarkdownRemark.nodes
+const BlogIndex: React.FC<PageProps<BlogIndexData>> = ({ data }) => {
+  const posts = [...data.allMarkdownRemark.nodes].sort(
+    compareBlogPostsDescending
+  )
 
   if (posts.length === 0) {
     return (
@@ -70,7 +66,7 @@ const BlogIndex: React.FC<BlogIndexProps> = ({ data, location }) => {
                       <span itemProp="headline">{title}</span>
                     </Link>
                   </h2>
-                  <small>{post.frontmatter.date}</small>
+                  <small>{post.frontmatter.formattedDate}</small>
                 </header>
                 <section>
                   <p
@@ -102,19 +98,19 @@ export const Head: React.FC = () => (
 
 export const pageQuery = graphql`
   {
-    site {
-      siteMetadata {
-        title
-      }
-    }
-    allMarkdownRemark(sort: { frontmatter: { date: DESC } }) {
+    allMarkdownRemark(
+      filter: { fields: { isBlog: { eq: true } } }
+      sort: { frontmatter: { date: DESC } }
+    ) {
       nodes {
         excerpt
         fields {
           slug
+          legacyPath
         }
         frontmatter {
-          date(formatString: "MMMM DD, YYYY")
+          date
+          formattedDate: date(formatString: "MMMM DD, YYYY")
           title
           description
         }

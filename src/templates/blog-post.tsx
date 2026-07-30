@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Link, graphql } from "gatsby"
+import { HeadProps, Link, PageProps, graphql } from "gatsby"
 import Bio from "../components/Bio"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
@@ -29,6 +29,30 @@ const loadMermaid = (): Promise<MermaidApi> => {
 type BlogPostBodyProps = {
   html: string
   postId: string
+}
+
+type AdjacentPost = {
+  fields: {
+    slug: string
+  }
+  frontmatter: {
+    title: string
+  }
+}
+
+type BlogPostData = {
+  markdownRemark: {
+    id: string
+    html: string
+    excerpt: string
+    frontmatter: {
+      title: string
+      date: string
+      description?: string
+    }
+  }
+  previous: AdjacentPost | null
+  next: AdjacentPost | null
 }
 
 const BlogPostBody = ({ html, postId }: BlogPostBodyProps) => {
@@ -116,12 +140,9 @@ const BlogPostBody = ({ html, postId }: BlogPostBodyProps) => {
   )
 }
 
-const BlogPostTemplate = ({
-  data: { previous, next, site, markdownRemark: post },
-  location,
+const BlogPostTemplate: React.FC<PageProps<BlogPostData>> = ({
+  data: { previous, next, markdownRemark: post },
 }) => {
-  const siteTitle = site.siteMetadata?.title || `Title`
-
   return (
     <Layout>
       <article
@@ -169,7 +190,9 @@ const BlogPostTemplate = ({
   )
 }
 
-export const Head = ({ data: { markdownRemark: post } }) => {
+export const Head: React.FC<HeadProps<BlogPostData>> = ({
+  data: { markdownRemark: post },
+}) => {
   return <Seo title={post.frontmatter.title} description={post.excerpt || ""} />
 }
 
@@ -181,14 +204,10 @@ export const pageQuery = graphql`
     $previousPostId: String
     $nextPostId: String
   ) {
-    site {
-      siteMetadata {
-        title
-      }
-    }
     markdownRemark(id: { eq: $id }) {
       id
       html
+      excerpt
       frontmatter {
         title
         date(formatString: "MMMM DD, YYYY")

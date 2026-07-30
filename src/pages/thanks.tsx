@@ -1,5 +1,5 @@
 import * as React from "react"
-import { graphql, PageProps } from "gatsby"
+import { graphql, Link, PageProps } from "gatsby"
 
 import Layout from "../components/layout"
 import Seo from "../components/seo"
@@ -22,9 +22,7 @@ const ThanksPage: React.FC<PageProps<NotFoundPageData>> = ({
     <Layout>
       <h1>Thank you</h1>
       <p>Your message has been sent.</p>
-      <a href={"/"} target="_blank" rel="noreferrer">
-        Go back to the homepage
-      </a>
+      <Link to="/">Go back to the homepage</Link>
     </Layout>
   )
 }

@@ -1,5 +1,5 @@
 import * as React from "react"
-import { useStaticQuery, graphql } from "gatsby"
+import { Link, useStaticQuery, graphql } from "gatsby"
 const css = require("./index.module.css")
 
 type Props = {
@@ -36,9 +36,9 @@ const Bio = ({ header }: Props) => {
       {!header && (
         <div className={css.contactContainer}>
           Handyman for the web{" "}
-          <a href="/#contact" className={css.contactLink}>
+          <Link to="/#contact" className={css.contactLink}>
             Let's get in touch
-          </a>
+          </Link>
         </div>
       )}
     </div>

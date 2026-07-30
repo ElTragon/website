@@ -17,12 +17,12 @@ export default function BlogPreview({
 }: Props) {
   return (
     <div className={css.container}>
-      <Link className={css.header} to={linkTo} target="_blank">
+      <Link className={css.header} to={linkTo}>
         {title}
       </Link>
 
       <p className={css.description}>{description}</p>
-      <Link className={css.link} to={linkTo} target="_blank">
+      <Link className={css.link} to={linkTo}>
         Read More
       </Link>
     </div>

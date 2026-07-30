@@ -10,10 +10,17 @@
 require("dotenv").config({
   path: `.env`,
 })
+const {
+  BLOG_INDEX_PATH,
+  compareBlogPostsDescending,
+  toAbsoluteUrl,
+} = require("./src/utils/blog-routes")
 const site = `https://mariolopezdev.com/`
 const googleTrackingId = process.env.GATSBY_G_TRACKING_ID?.trim()
+const includeRoutingFixture = process.env.GATSBY_ROUTING_FIXTURE === `1`
 
 module.exports = {
+  trailingSlash: "always",
   siteMetadata: {
     title: `Mario's blog`,
     author: {
@@ -72,7 +79,10 @@ module.exports = {
               siteUrl
             }
           }
-          allMarkdownRemark(sort: {frontmatter: {date: DESC}}) {
+          allMarkdownRemark(
+            filter: {fields: {isBlog: {eq: true}}}
+            sort: {frontmatter: {date: DESC}}
+          ) {
             nodes {
               fields {
                 slug
@@ -87,25 +97,30 @@ module.exports = {
       `,
         resolveSiteUrl: () => site,
         resolvePages: ({ allMarkdownRemark: { nodes: mdxs } }) => {
-          const posts = mdxs.map(mdx => {
+          const sortedPosts = [...mdxs].sort(compareBlogPostsDescending)
+          const posts = sortedPosts.map(mdx => {
             return {
-              path: `/blogs${mdx.fields.slug}`,
-              lastmod: mdx.frontmatter.date,
+              path: mdx.fields.slug,
+              ...(mdx.frontmatter.date
+                ? { lastmod: mdx.frontmatter.date }
+                : {}),
               changefreq: "never",
               priority: 0.7,
             }
           })
 
+          const latestPostDate = sortedPosts[0]?.frontmatter.date
+
           const home = {
             path: "/",
-            lastmod: posts[0].date,
+            ...(latestPostDate ? { lastmod: latestPostDate } : {}),
             changefreq: "weekly",
             priority: 0.3,
           }
 
           const blog = {
-            path: "/blogs",
-            lastmod: posts[0].date,
+            path: BLOG_INDEX_PATH,
+            ...(latestPostDate ? { lastmod: latestPostDate } : {}),
             changefreq: "weekly",
             priority: 0.3,
           }
@@ -129,6 +144,17 @@ module.exports = {
         name: `blog`,
       },
     },
+    ...(includeRoutingFixture
+      ? [
+          {
+            resolve: `gatsby-source-filesystem`,
+            options: {
+              path: `${__dirname}/tests/fixtures/blog`,
+              name: `blog`,
+            },
+          },
+        ]
+      : []),
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -188,18 +214,28 @@ module.exports = {
         feeds: [
           {
             serialize: ({ query: { site, allMarkdownRemark } }) => {
-              return allMarkdownRemark.nodes.map(node => {
-                return Object.assign({}, node.frontmatter, {
-                  description: node.excerpt,
-                  date: node.frontmatter.date,
-                  url: site.siteMetadata.siteUrl + node.fields.slug,
-                  guid: site.siteMetadata.siteUrl + node.fields.slug,
-                  custom_elements: [{ "content:encoded": node.html }],
+              return [...allMarkdownRemark.nodes]
+                .sort(compareBlogPostsDescending)
+                .map(node => {
+                  const postUrl = toAbsoluteUrl(
+                    site.siteMetadata.siteUrl,
+                    node.fields.slug
+                  )
+
+                  return Object.assign({}, node.frontmatter, {
+                    description: node.excerpt,
+                    date: node.frontmatter.date,
+                    url: postUrl,
+                    guid: postUrl,
+                    custom_elements: [{ "content:encoded": node.html }],
+                  })
                 })
-              })
             },
             query: `{
-              allMarkdownRemark(sort: {frontmatter: {date: DESC}}) {
+              allMarkdownRemark(
+                filter: {fields: {isBlog: {eq: true}}}
+                sort: {frontmatter: {date: DESC}}
+              ) {
                 nodes {
                   excerpt
                   html
@@ -226,7 +262,7 @@ module.exports = {
             }`,
             output: "/rss.xml",
             title: "Mario Blog Feed",
-            match: "^/blog/",
+            match: `^${BLOG_INDEX_PATH}`,
           },
         ],
       },

@@ -1,15 +1,33 @@
 import * as React from "react"
-import { Link, graphql } from "gatsby"
+import { graphql, PageProps } from "gatsby"
 import Bio from "../components/Bio"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 import AboutMe from "../components/AboutMe"
 import NewestBlog from "../components/NewestBlog"
 import ContactMe from "../components/ContactMe"
+import { compareBlogPostsDescending } from "../utils/blog-routes"
 
-const BlogIndex = ({ data, location }) => {
-  const siteTitle = data.site.siteMetadata?.title || `Title`
-  const posts = data.allMarkdownRemark.nodes
+type HomePageData = {
+  allMarkdownRemark: {
+    nodes: Array<{
+      excerpt: string
+      fields: {
+        slug: string
+      }
+      frontmatter: {
+        date: string
+        title: string
+        description?: string
+      }
+    }>
+  }
+}
+
+const BlogIndex: React.FC<PageProps<HomePageData>> = ({ data }) => {
+  const posts = [...data.allMarkdownRemark.nodes].sort(
+    compareBlogPostsDescending
+  )
 
   if (posts.length === 0) {
     return (
@@ -56,19 +74,17 @@ export const Head = () => (
 
 export const pageQuery = graphql`
   {
-    site {
-      siteMetadata {
-        title
-      }
-    }
-    allMarkdownRemark(sort: { frontmatter: { date: DESC } }) {
+    allMarkdownRemark(
+      filter: { fields: { isBlog: { eq: true } } }
+      sort: { frontmatter: { date: DESC } }
+    ) {
       nodes {
         excerpt
         fields {
           slug
         }
         frontmatter {
-          date(formatString: "MMMM DD, YYYY")
+          date
           title
           description
           featuredImage {

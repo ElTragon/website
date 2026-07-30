@@ -1,5 +1,6 @@
 import * as React from "react"
 import { useState } from "react"
+import { Link } from "gatsby"
 import { IoIosMenu } from "react-icons/io"
 import { NavLinks } from "../constants"
 import Overlay from "../../Overlay"
@@ -23,7 +24,12 @@ type MenuProps = {
 const doubleSize = 28
 const MenuButton = ({ onClick }: MenuProps) => {
   return (
-    <button className={css.menuButton} onClick={onClick}>
+    <button
+      type="button"
+      className={css.menuButton}
+      onClick={onClick}
+      aria-label="Open navigation menu"
+    >
       <IoIosMenu size={doubleSize} />
     </button>
   )
@@ -33,16 +39,33 @@ const MobileNav = ({ logoSrc }: Props) => {
   const [openMenu, setOpenMenu] = useState(false)
 
   const onClick = () => setOpenMenu(prev => !prev)
+  const closeMenu = () => setOpenMenu(false)
 
   if (openMenu) {
     return (
       <Overlay onClick={onClick} logoSrc={logoSrc}>
         <div className={css.links}>
-          {NavLinks.map((link, i) => (
-            <a key={i} className={css.link} href={link.routeTo}>
-              {link.name}
-            </a>
-          ))}
+          {NavLinks.map(link =>
+            link.isDocument ? (
+              <a
+                key={link.routeTo}
+                className={css.link}
+                href={link.routeTo}
+                onClick={closeMenu}
+              >
+                {link.name}
+              </a>
+            ) : (
+              <Link
+                key={link.routeTo}
+                className={css.link}
+                to={link.routeTo}
+                onClick={closeMenu}
+              >
+                {link.name}
+              </Link>
+            )
+          )}
         </div>
       </Overlay>
     )

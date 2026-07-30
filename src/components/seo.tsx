@@ -14,7 +14,7 @@ type Props = {
   title: string
   description: string
   imagePath?: string
-  children?: JSX.Element
+  children?: React.ReactNode
 }
 
 const Seo = ({ description, title, children, imagePath }: Props) => {
