@@ -19,11 +19,11 @@ Assuming you get past the AI stage, how do you grab the attention of the reviewe
 
 You need to state what you did and, importantly, how that helped the company. For example:
 
-* Made the homepage faster
+- Made the homepage faster
 
 That's bad on purpose. A much better example would be:
 
-* Significantly improved homepage speed by 2 seconds, amplifying user satisfaction and retention rates
+- Significantly improved homepage speed by 2 seconds, amplifying user satisfaction and retention rates
 
 The main reason why this is better is because it makes clear what you did and why it helped the company. Having a snappier experience on the homepage is something most companies would want. Another reason is the retention rates and user satisfaction, depending on the position and how frontend-focused it is.
 
@@ -32,5 +32,3 @@ While it is recommended to redo your resume for every job you want, in practice,
 # Sadly, it is a numbers game
 
 Sadly, it is a numbers game. Apply to enough jobs, and you should land one in time. Yes, you do need to be prepared. Have a nice resume, do some LeetCode questions, and handle the culture interviews well. The market is tough right now, so we just need to ride it out.
-
-
