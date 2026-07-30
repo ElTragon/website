@@ -1,0 +1,7 @@
+[build]
+  command = "npm run build"
+  publish = "public"
+
+# File-based plugin configuration takes precedence over the Netlify UI.
+[[plugins]]
+  package = "@netlify/plugin-lighthouse"
