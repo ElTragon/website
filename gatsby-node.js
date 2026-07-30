@@ -6,24 +6,46 @@
 
 const path = require(`path`)
 const { createFilePath } = require(`gatsby-source-filesystem`)
+const {
+  compareBlogPostsAscending,
+  sanitizePathSegments,
+  toPortableRouteKey,
+  toCanonicalBlogPath,
+  withTrailingSlash,
+  withoutTrailingSlash,
+} = require(`./src/utils/blog-routes`)
 
 // Define the template for blog post
 const blogPost = path.resolve(`./src/templates/blog-post.tsx`)
+const claimedBlogRoutes = new Map()
 
 /**
  * @type {import('gatsby').GatsbyNode['createPages']}
  */
-exports.createPages = async ({ graphql, actions, reporter }) => {
-  const { createPage } = actions
+exports.createPages = async ({
+  graphql,
+  actions,
+  reporter,
+  getNodesByType,
+}) => {
+  const { createPage, createRedirect } = actions
 
   // Get all markdown blog posts sorted by date
   const result = await graphql(`
     {
-      allMarkdownRemark(sort: { frontmatter: { date: ASC } }, limit: 1000) {
+      allMarkdownRemark(
+        filter: { fields: { isBlog: { eq: true } } }
+        sort: { frontmatter: { date: ASC } }
+      ) {
         nodes {
           id
+          fileAbsolutePath
           fields {
             slug
+            legacyPath
+          }
+          frontmatter {
+            date
           }
         }
       }
@@ -38,7 +60,51 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     return
   }
 
-  const posts = result.data.allMarkdownRemark.nodes
+  const posts = result.data.allMarkdownRemark.nodes.sort(
+    compareBlogPostsAscending
+  )
+  claimedBlogRoutes.clear()
+  const claimedPostPaths = new Map()
+  const routeConflicts = []
+  const existingPageRoutes = new Map(
+    getNodesByType(`SitePage`)
+      .filter(page => page.component !== blogPost)
+      .map(page => [
+        toPortableRouteKey(page.path),
+        { component: page.component, routePath: page.path },
+      ])
+  )
+
+  posts.forEach(post => {
+    const { slug, legacyPath } = post.fields
+    const sourcePath = post.fileAbsolutePath || `Markdown node ${post.id}`
+
+    for (const routePath of [slug, legacyPath]) {
+      const routeKey = toPortableRouteKey(routePath)
+      const existingPost = claimedPostPaths.get(routeKey)
+      const existingPage = existingPageRoutes.get(routeKey)
+
+      if (existingPost && existingPost !== sourcePath) {
+        routeConflicts.push(
+          `"${routePath}" is claimed by both "${existingPost}" and "${sourcePath}"`
+        )
+      } else if (existingPage) {
+        routeConflicts.push(
+          `"${routePath}" from "${sourcePath}" conflicts with page component "${existingPage.component}"`
+        )
+      } else {
+        claimedPostPaths.set(routeKey, sourcePath)
+        claimedBlogRoutes.set(routeKey, { routePath, sourcePath })
+      }
+    }
+  })
+
+  if (routeConflicts.length > 0) {
+    reporter.panicOnBuild(
+      `Blog route conflicts detected:\n${routeConflicts.join(`\n`)}`
+    )
+    return
+  }
 
   // Create blog posts pages
   // But only if there's at least one markdown file found at "content/blog" (defined in gatsby-config.js)
@@ -58,23 +124,103 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           nextPostId,
         },
       })
+
+      const redirectFromPaths = new Set()
+
+      if (post.fields.legacyPath !== post.fields.slug) {
+        const encodedLegacyPath = encodeURI(post.fields.legacyPath)
+        redirectFromPaths.add(encodedLegacyPath)
+        redirectFromPaths.add(withoutTrailingSlash(encodedLegacyPath))
+      }
+
+      for (const fromPath of redirectFromPaths) {
+        createRedirect({
+          fromPath,
+          toPath: post.fields.slug,
+          isPermanent: true,
+          redirectInBrowser: true,
+        })
+      }
     })
+  }
+}
+
+/**
+ * Fail the build if a file-based or plugin-created page would be shadowed by a
+ * blog post or one of its legacy redirects. This runs when Gatsby's page
+ * creator adds src/pages routes, after createPages has claimed the blog paths.
+ *
+ * @type {import('gatsby').GatsbyNode['onCreatePage']}
+ */
+exports.onCreatePage = ({ page, reporter }) => {
+  const routePath = withTrailingSlash(page.path)
+  const routeKey = toPortableRouteKey(routePath)
+  const claimedBlogRoute = claimedBlogRoutes.get(routeKey)
+
+  if (claimedBlogRoute && page.component !== blogPost) {
+    reporter.panicOnBuild(
+      `Blog route "${claimedBlogRoute.routePath}" from "${claimedBlogRoute.sourcePath}" conflicts with page component "${page.component}"`
+    )
   }
 }
 
 /**
  * @type {import('gatsby').GatsbyNode['onCreateNode']}
  */
-exports.onCreateNode = ({ node, actions, getNode }) => {
+exports.onCreateNode = ({ node, actions, getNode, reporter }) => {
   const { createNodeField } = actions
+  const parent = node.parent ? getNode(node.parent) : null
 
-  if (node.internal.type === `MarkdownRemark`) {
-    const value = createFilePath({ node, getNode })
+  if (
+    node.internal.type === `MarkdownRemark` &&
+    parent?.sourceInstanceName === `blog`
+  ) {
+    const sourcePath =
+      parent.absolutePath || parent.relativePath || `Markdown node ${node.id}`
+    const title = node.frontmatter?.title
+    const date = node.frontmatter?.date
+    const metadataErrors = []
+
+    if (typeof title !== `string` || title.trim() === ``) {
+      metadataErrors.push(`a non-empty "title"`)
+    }
+
+    if (
+      typeof date !== `string` ||
+      date.trim() === `` ||
+      Number.isNaN(Date.parse(date))
+    ) {
+      metadataErrors.push(`a valid "date"`)
+    }
+
+    if (metadataErrors.length > 0) {
+      reporter.panicOnBuild(
+        `Invalid blog frontmatter in "${sourcePath}": expected ${metadataErrors.join(
+          ` and `
+        )}`
+      )
+      return
+    }
+
+    const legacyPath = sanitizePathSegments(createFilePath({ node, getNode }))
+    const slug = toCanonicalBlogPath(legacyPath)
+
+    createNodeField({
+      name: `isBlog`,
+      node,
+      value: true,
+    })
 
     createNodeField({
       name: `slug`,
       node,
-      value,
+      value: slug,
+    })
+
+    createNodeField({
+      name: `legacyPath`,
+      node,
+      value: legacyPath,
     })
   }
 }
@@ -119,7 +265,9 @@ exports.createSchemaCustomization = ({ actions }) => {
     }
 
     type Fields {
+      isBlog: Boolean
       slug: String
+      legacyPath: String
     }
   `)
 }

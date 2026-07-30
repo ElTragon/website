@@ -5,7 +5,7 @@ const css = require("./index.module.css")
 type Props = {
   onClick: () => void
   logoSrc: string
-  children: JSX.Element
+  children: React.ReactNode
 }
 
 const doubleSize = 28
@@ -19,7 +19,12 @@ const Overlay = ({ onClick, logoSrc, children }: Props) => {
           alt="logo"
           style={{ width: "30px", height: "30px" }}
         />
-        <button className={css.closeButton} onClick={onClick}>
+        <button
+          type="button"
+          className={css.closeButton}
+          onClick={onClick}
+          aria-label="Close navigation menu"
+        >
           <IoIosClose size={doubleSize} />
         </button>
       </div>
