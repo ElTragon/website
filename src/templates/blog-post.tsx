@@ -45,10 +45,17 @@ type BlogPostData = {
     id: string
     html: string
     excerpt: string
+    fields: {
+      slug: string
+    }
     frontmatter: {
       title: string
       date: string
+      datePublished: string
       description?: string
+      featuredImage?: {
+        publicURL?: string
+      }
     }
   }
   previous: AdjacentPost | null
@@ -193,7 +200,16 @@ const BlogPostTemplate: React.FC<PageProps<BlogPostData>> = ({
 export const Head: React.FC<HeadProps<BlogPostData>> = ({
   data: { markdownRemark: post },
 }) => {
-  return <Seo title={post.frontmatter.title} description={post.excerpt || ""} />
+  return (
+    <Seo
+      title={post.frontmatter.title}
+      description={post.frontmatter.description || post.excerpt}
+      pathname={post.fields.slug}
+      imagePath={post.frontmatter.featuredImage?.publicURL}
+      type="article"
+      datePublished={post.frontmatter.datePublished}
+    />
+  )
 }
 
 export default BlogPostTemplate
@@ -208,10 +224,17 @@ export const pageQuery = graphql`
       id
       html
       excerpt
+      fields {
+        slug
+      }
       frontmatter {
         title
         date(formatString: "MMMM DD, YYYY")
+        datePublished: date
         description
+        featuredImage {
+          publicURL
+        }
       }
     }
     previous: markdownRemark(id: { eq: $previousPostId }) {

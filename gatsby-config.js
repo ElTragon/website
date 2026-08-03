@@ -15,7 +15,7 @@ const {
   compareBlogPostsDescending,
   toAbsoluteUrl,
 } = require("./src/utils/blog-routes")
-const site = `https://mariolopezdev.com/`
+const siteUrl = `https://mariolopezdev.com/`
 const googleTrackingId = process.env.GATSBY_G_TRACKING_ID?.trim()
 const includeRoutingFixture = process.env.GATSBY_ROUTING_FIXTURE === `1`
 
@@ -28,9 +28,10 @@ module.exports = {
       summary: `a full stack engineer building cool stuff.`,
     },
     description: `Follow this blog to stay up to date on programming news and learn new stuff.`,
-    siteUrl: site,
+    siteUrl,
     social: {
       twitter: `https://twitter.com/guythatcodes`,
+      twitterUsername: `@guythatcodes`,
       github: `https://github.com/ElTragon`,
       linkedin: `https://www.linkedin.com/in/mario-lopez-644b1ab4/`,
     },
@@ -95,7 +96,7 @@ module.exports = {
           }
         }
       `,
-        resolveSiteUrl: () => site,
+        resolveSiteUrl: ({ site }) => site.siteMetadata.siteUrl,
         resolvePages: ({ allMarkdownRemark: { nodes: mdxs } }) => {
           const sortedPosts = [...mdxs].sort(compareBlogPostsDescending)
           const posts = sortedPosts.map(mdx => {
@@ -207,10 +208,18 @@ module.exports = {
                 description
                 siteUrl
                 site_url: siteUrl
+                author {
+                  name
+                }
               }
             }
           }
         `,
+        setup: ({ query: { site }, ...feedOptions }) => ({
+          ...site.siteMetadata,
+          ...feedOptions,
+          author: site.siteMetadata.author.name,
+        }),
         feeds: [
           {
             serialize: ({ query: { site, allMarkdownRemark } }) => {
@@ -223,7 +232,8 @@ module.exports = {
                   )
 
                   return Object.assign({}, node.frontmatter, {
-                    description: node.excerpt,
+                    author: site.siteMetadata.author.name,
+                    description: node.frontmatter.description || node.excerpt,
                     date: node.frontmatter.date,
                     url: postUrl,
                     guid: postUrl,
@@ -245,17 +255,7 @@ module.exports = {
                   frontmatter {
                     title
                     date
-                    featuredImage {
-                      childImageSharp {
-                        gatsbyImageData(
-                          height: 627
-                          width: 1200
-                          placeholder: BLURRED
-                          transformOptions: { fit: CONTAIN }
-                          layout: FIXED
-                        )
-                      }
-                    }                  
+                    description
                   }
                 }
               }
