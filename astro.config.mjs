@@ -8,6 +8,8 @@ import {
   getSitemapPostDates,
 } from "./scripts/content-artifacts.mjs"
 
+import netlify from "@astrojs/netlify"
+
 const sitemapPostDates = await getSitemapPostDates()
 const latestPostDate = getLatestPostDate(sitemapPostDates)
 
@@ -16,6 +18,7 @@ export default defineConfig({
   publicDir: "static",
   output: "static",
   trailingSlash: "always",
+
   integrations: [
     react(),
     sitemap({
@@ -48,8 +51,11 @@ export default defineConfig({
       },
     }),
   ],
+
   markdown: {
     processor: unified({ rehypePlugins: [linkedHeadings] }),
     syntaxHighlight: "prism",
   },
+
+  adapter: netlify(),
 })
