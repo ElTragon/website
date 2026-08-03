@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import IconCopy from "../Icons/copy"
-
-const css = require("./index.module.css")
+import css from "./index.module.css"
 
 export default function ContactMe() {
   const [success, setSuccess] = useState(false)

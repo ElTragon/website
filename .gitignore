@@ -55,9 +55,11 @@ typings/
 .env*
 .netlify/
 
-# gatsby files
+# Generated site files
+.astro/
+dist/
 .cache/
-public
+public/
 
 # Mac files
 .DS_Store

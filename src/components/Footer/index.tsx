@@ -1,6 +1,5 @@
-import * as React from "react"
 import Icon from "../Icons/icon"
-const css = require("./index.module.css")
+import css from "./index.module.css"
 
 type SocialLinkType = {
   linkTo: string

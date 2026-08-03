@@ -1,0 +1,123 @@
+---
+import { getCollection, render, type CollectionEntry } from "astro:content"
+import BaseLayout from "../../layouts/BaseLayout.astro"
+import Bio from "../../components/Bio"
+import {
+  comparePostsDescending,
+  postPath,
+  postSlug,
+  validatePostRoutes,
+} from "../../utils/blog-routes"
+
+export async function getStaticPaths() {
+  const posts = (await getCollection("blog")).sort(comparePostsDescending)
+  validatePostRoutes(posts)
+
+  return posts.map((post: CollectionEntry<"blog">, index: number) => ({
+    params: { slug: postSlug(post).slice(1, -1) },
+    props: {
+      post,
+      previous: posts[index + 1] ?? null,
+      next: posts[index - 1] ?? null,
+    },
+  }))
+}
+
+interface Props {
+  post: CollectionEntry<"blog">
+  previous: CollectionEntry<"blog"> | null
+  next: CollectionEntry<"blog"> | null
+}
+
+const { post, previous, next } = Astro.props
+const { Content } = await render(post)
+const canonicalPath = postPath(post)
+---
+
+<BaseLayout
+  title={post.data.title}
+  description={post.data.description}
+  pathname={canonicalPath}
+  imagePath={post.data.featuredImage.src}
+  type="article"
+  datePublished={post.data.date}
+>
+  <article class="blog-post" itemscope itemtype="http://schema.org/Article">
+    <header>
+      <h1 itemprop="headline">{post.data.title}</h1>
+      <p>
+        {
+          post.data.date.toLocaleDateString("en-US", {
+            month: "long",
+            day: "2-digit",
+            year: "numeric",
+          })
+        }
+      </p>
+    </header>
+    <section class="blog-post-body" itemprop="articleBody"><Content /></section>
+    <hr />
+    <footer><Bio /></footer>
+  </article>
+  <nav class="blog-post-nav" aria-label="Adjacent blog posts">
+    <ul
+      style="display: flex; flex-wrap: wrap; justify-content: space-between; list-style: none; padding: 0"
+    >
+      <li>
+        {
+          previous && (
+            <a href={postPath(previous)} rel="prev">
+              ← {previous.data.title}
+            </a>
+          )
+        }
+      </li>
+      <li>
+        {
+          next && (
+            <a href={postPath(next)} rel="next">
+              {next.data.title} →
+            </a>
+          )
+        }
+      </li>
+    </ul>
+  </nav>
+  <script>
+    const sourceBlocks = Array.from(
+      document.querySelectorAll("pre > code.language-mermaid"),
+    )
+    if (sourceBlocks.length > 0) {
+      import("mermaid")
+        .then(({ default: mermaid }) => {
+          mermaid.initialize({ startOnLoad: false })
+          return Promise.all(
+            sourceBlocks.map(async (codeBlock, index) => {
+              const pre = codeBlock.parentElement
+              if (!pre) return
+              try {
+                const { svg, bindFunctions } = await mermaid.render(
+                  `mermaid-diagram-${index}`,
+                  codeBlock.textContent ?? "",
+                )
+                const diagram = document.createElement("div")
+                diagram.className = "mermaid"
+                diagram.innerHTML = svg
+                pre.after(diagram)
+                bindFunctions?.(diagram)
+                pre.remove()
+              } catch (error) {
+                console.error(
+                  `Unable to render Mermaid diagram ${index + 1}`,
+                  error,
+                )
+              }
+            }),
+          )
+        })
+        .catch(error =>
+          console.error("Unable to render Mermaid diagrams", error),
+        )
+    }
+  </script>
+</BaseLayout>

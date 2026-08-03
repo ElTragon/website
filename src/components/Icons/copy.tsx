@@ -1,5 +1,3 @@
-import React from "react"
-
 const IconCopy = () => (
   <svg
     fill="#000000"

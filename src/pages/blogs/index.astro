@@ -1,0 +1,61 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content"
+import BaseLayout from "../../layouts/BaseLayout.astro"
+import Bio from "../../components/Bio"
+import {
+  comparePostsDescending,
+  postPath,
+  validatePostRoutes,
+} from "../../utils/blog-routes"
+
+const posts = (await getCollection("blog")).sort(comparePostsDescending)
+validatePostRoutes(posts)
+---
+
+<BaseLayout
+  title="All posts"
+  description="Check out all my blogs"
+  pathname="/blogs/"
+>
+  <h2>Blogs</h2>
+  {
+    posts.length === 0 ? (
+      <>
+        <>
+          <Bio />
+          <p>No blog posts found. Add Markdown posts to content/blog.</p>
+        </>
+      </>
+    ) : (
+      <ol style="list-style: none">
+        {posts.map((post: CollectionEntry<"blog">) => (
+          <li>
+            <article
+              class="post-list-item"
+              itemscope
+              itemtype="http://schema.org/Article"
+            >
+              <header>
+                <h2>
+                  <a href={postPath(post)} itemprop="url">
+                    <span itemprop="headline">{post.data.title}</span>
+                  </a>
+                </h2>
+                <small>
+                  {post.data.date.toLocaleDateString("en-US", {
+                    month: "long",
+                    day: "2-digit",
+                    year: "numeric",
+                  })}
+                </small>
+              </header>
+              <section>
+                <p itemprop="description">{post.data.description}</p>
+              </section>
+            </article>
+          </li>
+        ))}
+      </ol>
+    )
+  }
+</BaseLayout>

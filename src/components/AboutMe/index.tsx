@@ -1,6 +1,4 @@
-import * as React from "react"
-import { useStaticQuery, graphql } from "gatsby"
-const css = require("./index.module.css")
+import css from "./index.module.css"
 
 const leftTech = ["Javascript", "Typescript", "React"]
 

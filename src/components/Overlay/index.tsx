@@ -1,11 +1,11 @@
-import * as React from "react"
+import type { ReactNode } from "react"
 import { IoIosClose } from "react-icons/io"
-const css = require("./index.module.css")
+import css from "./index.module.css"
 
 type Props = {
   onClick: () => void
   logoSrc: string
-  children: React.ReactNode
+  children: ReactNode
 }
 
 const doubleSize = 28

@@ -1,35 +1,12 @@
-import * as React from "react"
 import DeskTopNav from "./DeskTopNav"
 import MobileNav from "./MobileNav"
-import { graphql, useStaticQuery } from "gatsby"
-const css = require("./index.module.css")
+import css from "./index.module.css"
 
-const NavBar = () => {
-  const { logo } = useStaticQuery(
-    graphql`
-      query {
-        site {
-          siteMetadata {
-            title
-            description
-            social {
-              twitter
-            }
-          }
-        }
-        logo: file(relativePath: { eq: "logo.png" }) {
-          childImageSharp {
-            fixed(height: 800, width: 800) {
-              src
-            }
-          }
-        }
-      }
-    `
-  )
+type Props = {
+  logoSrc: string
+}
 
-  const logoSrc = (logo.childImageSharp.fixed.src as string) || ""
-
+const NavBar = ({ logoSrc }: Props) => {
   return (
     <>
       <div className={css.desktopNav}>
