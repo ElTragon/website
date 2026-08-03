@@ -117,13 +117,13 @@ h4,
 h5,
 h6 {
   font-weight: var(--fontWeight-bold);
-  color: var(color-accent);
+  color: var(--color-accent);
 }
 
 h1 {
   font-weight: var(--fontWeight-black);
   font-size: var(--fontSize-6);
-  color: var(color-primary);
+  color: var(--color-primary);
 }
 
 h2 {
@@ -337,6 +337,25 @@ a:focus {
 
 .gatsby-highlight {
   margin-bottom: var(--spacing-8);
+}
+
+.heading-anchor {
+  display: inline-block;
+  margin-left: 0.4em;
+  color: var(--color-accent);
+  text-decoration: none;
+  opacity: 0;
+  transition: opacity 150ms ease;
+}
+
+h1:hover > .heading-anchor,
+h2:hover > .heading-anchor,
+h3:hover > .heading-anchor,
+h4:hover > .heading-anchor,
+h5:hover > .heading-anchor,
+h6:hover > .heading-anchor,
+.heading-anchor:focus-visible {
+  opacity: 1;
 }
 
 /* Media queries */

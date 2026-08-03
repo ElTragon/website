@@ -1,0 +1,31 @@
+---
+import { getCollection } from "astro:content"
+import BaseLayout from "../layouts/BaseLayout.astro"
+import Bio from "../components/Bio"
+import AboutMe from "../components/AboutMe"
+import NewestBlog from "../components/NewestBlog"
+import ContactMe from "../components/ContactMe"
+import { comparePostsDescending, postPath } from "../utils/blog-routes"
+
+const posts = (await getCollection("blog")).sort(comparePostsDescending)
+const newestPost = posts[0]
+---
+
+<BaseLayout
+  title="Mario's blog"
+  description="Stay up with Dev news with Mario"
+  pathname="/"
+>
+  <Bio header />
+  {
+    newestPost && (
+      <NewestBlog
+        title={newestPost.data.title}
+        linkTo={postPath(newestPost)}
+        description={newestPost.data.description}
+      />
+    )
+  }
+  <AboutMe />
+  <ContactMe client:visible />
+</BaseLayout>

@@ -1,7 +1,5 @@
-import * as React from "react"
-import { Link } from "gatsby"
 import { NavLinks } from "../constants"
-const css = require("./index.module.css")
+import css from "./index.module.css"
 
 type Props = {
   logoSrc: string
@@ -21,14 +19,10 @@ const DeskTopNav = ({ logoSrc }: Props) => {
             </>
           )
 
-          return link.isDocument ? (
+          return (
             <a key={link.routeTo} className={css.link} href={link.routeTo}>
               {content}
             </a>
-          ) : (
-            <Link key={link.routeTo} className={css.link} to={link.routeTo}>
-              {content}
-            </Link>
           )
         })}
       </div>

@@ -1,31 +1,10 @@
-import * as React from "react"
-import { Link, useStaticQuery, graphql } from "gatsby"
-const css = require("./index.module.css")
+import css from "./index.module.css"
 
 type Props = {
   header?: boolean
 }
 
 const Bio = ({ header }: Props) => {
-  const data = useStaticQuery(graphql`
-    query BioQuery {
-      site {
-        siteMetadata {
-          author {
-            name
-            summary
-          }
-          social {
-            twitter
-          }
-        }
-      }
-    }
-  `)
-
-  const author = data.site.siteMetadata?.author
-  const social = data.site.siteMetadata?.social // use later
-
   return (
     <div className={css.container}>
       <p className={css.pretext}>{header ? "It's-a me" : "Made by"}</p>
@@ -36,9 +15,9 @@ const Bio = ({ header }: Props) => {
       {!header && (
         <div className={css.contactContainer}>
           Handyman for the web{" "}
-          <Link to="/#contact" className={css.contactLink}>
+          <a href="/#contact" className={css.contactLink}>
             Let's get in touch
-          </Link>
+          </a>
         </div>
       )}
     </div>

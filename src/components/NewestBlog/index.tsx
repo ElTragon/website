@@ -1,6 +1,5 @@
-import * as React from "react"
 import BlogPreview from "../BlogPreview"
-const css = require("./index.module.css")
+import css from "./index.module.css"
 
 type Props = {
   title: string

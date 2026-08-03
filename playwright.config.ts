@@ -58,8 +58,9 @@ export default defineConfig({
   ],
 
   webServer: {
-    command: "npm run serve -- --host 127.0.0.1 --port 9000",
+    // Use the complete build so redirects and RSS assets are generated too.
+    command: "npm run build && npx serve dist -l 9000",
     url: "http://127.0.0.1:9000",
-    reuseExistingServer: false,
+    reuseExistingServer: !process.env.CI,
   },
 })

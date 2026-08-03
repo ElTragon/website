@@ -1,10 +1,8 @@
-import * as React from "react"
 import { useState } from "react"
-import { Link } from "gatsby"
 import { IoIosMenu } from "react-icons/io"
 import { NavLinks } from "../constants"
 import Overlay from "../../Overlay"
-const css = require("./index.module.css")
+import css from "./index.module.css"
 
 type Props = {
   logoSrc: string
@@ -45,27 +43,16 @@ const MobileNav = ({ logoSrc }: Props) => {
     return (
       <Overlay onClick={onClick} logoSrc={logoSrc}>
         <div className={css.links}>
-          {NavLinks.map(link =>
-            link.isDocument ? (
-              <a
-                key={link.routeTo}
-                className={css.link}
-                href={link.routeTo}
-                onClick={closeMenu}
-              >
-                {link.name}
-              </a>
-            ) : (
-              <Link
-                key={link.routeTo}
-                className={css.link}
-                to={link.routeTo}
-                onClick={closeMenu}
-              >
-                {link.name}
-              </Link>
-            )
-          )}
+          {NavLinks.map(link => (
+            <a
+              key={link.routeTo}
+              className={css.link}
+              href={link.routeTo}
+              onClick={closeMenu}
+            >
+              {link.name}
+            </a>
+          ))}
         </div>
       </Overlay>
     )

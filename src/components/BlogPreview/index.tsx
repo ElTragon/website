@@ -1,30 +1,22 @@
-import React from "react"
-const css = require("./index.module.css")
-import { Link } from "gatsby"
+import css from "./index.module.css"
 
 type Props = {
   title: string
   description: string
   linkTo: string
-  tagLine?: string
 }
 
-export default function BlogPreview({
-  title,
-  description,
-  linkTo,
-  tagLine,
-}: Props) {
+export default function BlogPreview({ title, description, linkTo }: Props) {
   return (
     <div className={css.container}>
-      <Link className={css.header} to={linkTo}>
+      <a className={css.header} href={linkTo}>
         {title}
-      </Link>
+      </a>
 
       <p className={css.description}>{description}</p>
-      <Link className={css.link} to={linkTo}>
+      <a className={css.link} href={linkTo}>
         Read More
-      </Link>
+      </a>
     </div>
   )
 }
