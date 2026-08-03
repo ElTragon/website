@@ -93,7 +93,11 @@ export default BlogIndex
  * See: https://www.gatsbyjs.com/docs/reference/built-in-components/gatsby-head/
  */
 export const Head: React.FC = () => (
-  <Seo title="All posts" description={"Check out all my blogs"} />
+  <Seo
+    title="All posts"
+    description="Check out all my blogs"
+    pathname="/blogs/"
+  />
 )
 
 export const pageQuery = graphql`

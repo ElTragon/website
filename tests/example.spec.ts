@@ -146,6 +146,106 @@ test("renders the home page", async ({ page }) => {
   await expect(page.getByRole("heading", { name: "Mario Lopez" })).toBeVisible()
 })
 
+test("publishes canonical social and structured metadata", async ({ page }) => {
+  await page.goto("/")
+
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+    "href",
+    "https://mariolopezdev.com/"
+  )
+  await expect(
+    page.locator('link[type="application/rss+xml"]')
+  ).toHaveAttribute("href", "https://mariolopezdev.com/rss.xml")
+  await expect(page.locator('link[rel="manifest"]')).toHaveAttribute(
+    "href",
+    "/manifest.webmanifest"
+  )
+  await expect(page.locator('meta[property="og:type"]')).toHaveAttribute(
+    "content",
+    "website"
+  )
+  await expect(page.locator('meta[property="og:url"]')).toHaveAttribute(
+    "content",
+    "https://mariolopezdev.com/"
+  )
+  await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
+    "content",
+    /^https:\/\/mariolopezdev\.com\/.+/
+  )
+  await expect(page.locator('meta[name="twitter:creator"]')).toHaveAttribute(
+    "content",
+    "@guythatcodes"
+  )
+  await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute(
+    "content",
+    "summary"
+  )
+
+  const structuredData = JSON.parse(
+    (await page.locator('script[type="application/ld+json"]').textContent()) ||
+      "{}"
+  ) as {
+    "@type"?: string
+    url?: string
+  }
+
+  expect(structuredData["@type"]).toBe("WebPage")
+  expect(structuredData.url).toBe("https://mariolopezdev.com/")
+})
+
+test("publishes article metadata for blog posts", async ({ page }) => {
+  const postPath = "/blogs/hire-me-4-13-2024/"
+  await page.goto(postPath)
+
+  const canonicalUrl = `https://mariolopezdev.com${postPath}`
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+    "href",
+    canonicalUrl
+  )
+  await expect(page.locator('meta[property="og:type"]')).toHaveAttribute(
+    "content",
+    "article"
+  )
+  await expect(page.locator('meta[property="og:url"]')).toHaveAttribute(
+    "content",
+    canonicalUrl
+  )
+  await expect(
+    page.locator('meta[property="article:published_time"]')
+  ).toHaveAttribute("content", /^\d{4}-\d{2}-\d{2}T/)
+  await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
+    "content",
+    /^https:\/\/mariolopezdev\.com\/static\/.+/
+  )
+  await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute(
+    "content",
+    "summary_large_image"
+  )
+
+  const structuredData = JSON.parse(
+    (await page.locator('script[type="application/ld+json"]').textContent()) ||
+      "{}"
+  ) as {
+    "@type"?: string
+    datePublished?: string
+    mainEntityOfPage?: string
+  }
+
+  expect(structuredData["@type"]).toBe("BlogPosting")
+  expect(structuredData.datePublished).toMatch(/^\d{4}-\d{2}-\d{2}T/)
+  expect(structuredData.mainEntityOfPage).toBe(canonicalUrl)
+})
+
+test("keeps non-content pages out of search indexes", async ({ page }) => {
+  for (const pathname of ["/thanks/", "/this-page-does-not-exist/"]) {
+    await page.goto(pathname)
+    await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
+      "content",
+      "noindex, nofollow"
+    )
+  }
+})
+
 test("closes mobile navigation when selecting the current route", async ({
   page,
 }) => {
@@ -203,6 +303,8 @@ test("publishes the encoded route through Gatsby and generated artifacts", async
 
   expect(sitemap).toContain(absoluteUrl)
   expect(rss).toContain(absoluteUrl)
+  expect(rss).toContain("<author><![CDATA[Mario Lopez]]></author>")
+  expect(rss).not.toContain("[object Object]")
 })
 
 test("uses canonical blog routes and preserves legacy redirects", async ({

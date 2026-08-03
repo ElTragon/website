@@ -69,7 +69,11 @@ export default BlogIndex
  * See: https://www.gatsbyjs.com/docs/reference/built-in-components/gatsby-head/
  */
 export const Head = () => (
-  <Seo title="Mario's blog" description="Stay up with Dev news with Mario" />
+  <Seo
+    title="Mario's blog"
+    description="Stay up with Dev news with Mario"
+    pathname="/"
+  />
 )
 
 export const pageQuery = graphql`
