@@ -58,8 +58,8 @@ export default defineConfig({
   ],
 
   webServer: {
-    // Builds your Astro site and serves the static output directory directly
-    command: "npx astro build && npx serve dist -l 9000",
+    // Use the complete build so redirects and RSS assets are generated too.
+    command: "npm run build && npx serve dist -l 9000",
     url: "http://127.0.0.1:9000",
     reuseExistingServer: !process.env.CI,
   },
