@@ -55,6 +55,20 @@ const structuredData =
         description,
         url: canonicalUrl,
         isPartOf: { "@type": "WebSite", name: site.title, url: site.url },
+        about: {
+          "@type": "Person",
+          name: site.author.name,
+          jobTitle: site.author.jobTitle,
+          description: site.author.summary,
+          email: `mailto:${site.author.email}`,
+          telephone: site.author.telephone,
+          url: site.url,
+          sameAs: [
+            site.social.github,
+            site.social.linkedin,
+            site.social.twitter,
+          ],
+        },
       }
 const analyticsId = (
   import.meta.env.PUBLIC_GA_TRACKING_ID || process.env.GATSBY_G_TRACKING_ID
