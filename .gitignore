@@ -73,3 +73,6 @@ yarn-error.log
 /test-results/
 /playwright-report/
 /playwright/.cache/
+
+# Local editor settings
+/.vscode/settings.json
