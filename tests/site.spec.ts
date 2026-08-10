@@ -39,10 +39,21 @@ test("rejects legacy post routes that shadow site pages", () => {
   ).toThrow(/legacy route.*conflicts with blog post.*canonical route/)
 })
 
-test("renders the home page with canonical metadata", async ({ page }) => {
+test("presents the FDE-oriented homepage with canonical identity metadata", async ({
+  page,
+}) => {
   await page.goto("/")
-  await expect(page).toHaveTitle(/Mario/)
-  await expect(page.getByRole("heading", { name: "Mario Lopez" })).toBeVisible()
+  await expect(page).toHaveTitle(
+    "Full-Stack Engineer for Complex Customer Problems | Mario Lopez",
+  )
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+    "Full-Stack Engineer for Complex Customer Problems",
+  )
+  await expect(page.getByRole("heading", { level: 1 })).toHaveCount(1)
+  await expect(page.locator('meta[name="description"]')).toHaveAttribute(
+    "content",
+    /integrations, customer workflows, regulated systems/,
+  )
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
     "href",
     "https://mariolopezdev.com/",
@@ -50,6 +61,47 @@ test("renders the home page with canonical metadata", async ({ page }) => {
   await expect(
     page.locator('link[type="application/rss+xml"]'),
   ).toHaveAttribute("href", "/rss.xml")
+
+  const structuredData = JSON.parse(
+    (await page.locator('script[type="application/ld+json"]').textContent()) ??
+      "{}",
+  )
+  expect(structuredData.about).toMatchObject({
+    "@type": "Person",
+    name: "Mario Lopez",
+    jobTitle: "Full-Stack Engineer",
+    email: "mailto:m9lopeztri@gmail.com",
+    telephone: "+1-818-489-6242",
+  })
+})
+
+test("connects homepage actions to work, contact, and the selected resume", async ({
+  page,
+  request,
+}) => {
+  await page.goto("/")
+
+  await page.getByRole("link", { name: "View Work", exact: true }).click()
+  await expect(page).toHaveURL(/\/#work$/)
+  await expect(
+    page.getByRole("heading", {
+      name: "Selected projects",
+    }),
+  ).toBeVisible()
+
+  await expect(
+    page.getByRole("link", { name: "m9lopeztri@gmail.com" }),
+  ).toHaveAttribute("href", "mailto:m9lopeztri@gmail.com")
+  await expect(
+    page.getByRole("link", { name: "818-489-6242" }),
+  ).toHaveAttribute("href", "tel:+18184896242")
+
+  const resumeLink = page.getByRole("link", { name: /Resume$/ })
+  await expect(resumeLink).toHaveAttribute("href", "/resume.pdf")
+  const resumeResponse = await request.get("/resume.pdf")
+  expect(resumeResponse.ok()).toBe(true)
+  expect(resumeResponse.headers()["content-type"]).toContain("application/pdf")
+  expect((await resumeResponse.body()).subarray(0, 5).toString()).toBe("%PDF-")
 })
 
 test("closes mobile navigation when selecting the current route", async ({

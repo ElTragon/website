@@ -10,7 +10,7 @@ Use the Node.js and npm versions declared in `.nvmrc` and `package.json`.
 ```shell
 nvm use
 npm ci
-npm run develop
+npm run dev
 ```
 
 The development server is available at `http://localhost:4321`.

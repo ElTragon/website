@@ -1,11 +1,14 @@
 export const site = {
   url: "https://mariolopezdev.com/",
-  title: "Mario's blog",
+  title: "Mario Lopez",
   description:
-    "Follow this blog to stay up to date on programming news and learn new stuff.",
+    "Full-stack software engineer specializing in integrations, customer workflows, regulated systems, and reliable product delivery.",
   author: {
     name: "Mario Lopez",
-    summary: "a full stack engineer building cool stuff.",
+    jobTitle: "Full-Stack Engineer",
+    summary: "Full-Stack Engineer for Complex Customer Problems",
+    email: "m9lopeztri@gmail.com",
+    telephone: "+1-818-489-6242",
   },
   social: {
     twitter: "https://twitter.com/guythatcodes",
