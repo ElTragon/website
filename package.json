@@ -60,7 +60,7 @@
   "scripts": {
     "audit:production": "npm audit --omit=dev --audit-level=critical",
     "build": "ASTRO_TELEMETRY_DISABLED=1 astro check && ASTRO_TELEMETRY_DISABLED=1 astro build && node scripts/generate-redirects.mjs",
-    "develop": "ASTRO_TELEMETRY_DISABLED=1 astro dev",
+    "dev": "ASTRO_TELEMETRY_DISABLED=1 astro dev",
     "prettier": "prettier --check './**/*.{js,jsx,mjs,ts,tsx,astro,md}'",
     "prettier-fix": "prettier --write './**/*.{js,jsx,mjs,ts,tsx,astro,md}'",
     "start": "ASTRO_TELEMETRY_DISABLED=1 astro dev",
