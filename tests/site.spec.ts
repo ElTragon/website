@@ -85,7 +85,7 @@ test("connects homepage actions to work, contact, and the selected resume", asyn
   await expect(page).toHaveURL(/\/#work$/)
   await expect(
     page.getByRole("heading", {
-      name: "From unclear workflows to dependable systems",
+      name: "Selected projects",
     }),
   ).toBeVisible()
 

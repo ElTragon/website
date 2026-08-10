@@ -12,8 +12,9 @@ Primary statement:
 
 Supporting idea:
 
-Mario works with customers and domain experts to understand operational
-problems, build integrations and products, and deploy reliable solutions.
+Mario works with customers and domain experts to turn complicated workflows
+into software, including healthcare integrations, internal tools, and
+full-stack products.
 
 The site demonstrates capabilities associated with forward-deployed
 engineering without claiming that Mario previously held that formal title.
